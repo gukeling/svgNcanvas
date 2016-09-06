@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css-clip</title>
+</head>
+<body>
+<style>
+
+    .wrap{
+        width: 600px;
+        height: 600px;
+        margin: 30px auto;
+        border: 1px solid #049fbb;
+        background: url("../../img/IMG_0036.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .clip-polygon{
+        -webkit-clip-path: polygon(0 100%, 20% 0, 80% 0, 100% 100%);/*polygon:多边形*/
+    }
+
+
+    .clip-circle {
+        -webkit-clip-path: circle(50% at 50% 50%);
+    }
+
+
+    /*为了实现椭圆，需要给 ellipse 提供4个值：椭圆的 x 轴半径、 y 轴半径、定位椭圆位置的 x 坐标和 y 坐标，后面两个值用 at 关键字和前面两个值分开。*/
+    .clip-ellipse {
+        -webkit-clip-path: ellipse(30% 20% at 50% 50%);
+    }
+
+    /*因为多边形边缘锐利，所以它可能不是你想要的东西，你想创建的是圆角矩形，所以我们来看看Inset的值。Inset使用四个值（对应“ 上 右 下 左 ”的顺序）来设置 圆角半径 。*/
+
+    .clip-inset {
+        -webkit-clip-path: inset(25% 0 25% 0 round 0 25% 0 25%);
+    }
+
+    /*上面的各个值分别对应为：
+    inset(<top> <right> <bottom> <left> round <top-radius> <right-radius> <bottom-radius> <left-radius>)
+    其简写形式：
+
+    .clipClass {
+        -webkit-clip-path: inset(25% 0 round 0 25%);
+    }*/
+
+
+
+    .animateClass {
+        -webkit-clip-path: polygon(20% 0%, 0% 0%, 0% 50%, 0% 80%, 0% 100%, 50% 100%, 80% 100%, 100% 100%, 100% 50%, 100% 0%, 80% 0%, 50% 0%);
+        transition: -webkit-clip-path 0.5s;
+    }
+    .animateClass:hover {
+        -webkit-clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    }
+
+
+
+
+</style>
+
+<div class="wrap clip-polygon"></div>
+<div class="wrap clip-circle"></div>
+<div class="wrap clip-ellipse"></div>
+<div class="wrap clip-inset"></div>
+<div class="wrap animateClass"></div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图像处理</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);">
+    <h3>
+        图像处理
+    </h3>
+    <p>context.drawImage(image/canvas, dx, dy)——基础用法</p>
+    <p>context.drawImage(image/canvas, dx, dy, dw, dy)——后两个参数是图片要显示的宽和高（被压缩）</p>
+
+
+    <pre><xmp></xmp></pre>
+    <pre><code>
+        <p>
+        context.drawImage(
+            image/canvas,
+            sx, sy, sw, sy
+            dx, dy, dw, dy
+        )
+        ——完全体
+        </p>
+
+        <p>
+            imageData = context.getImageData(x, y, w, h);
+            ——获取图像像素
+
+            imageData : width, height, data
+        </p>
+
+        <p>
+            context.putImageData(
+                imageData,
+                dx, dy,
+                dirtyX, dirtyY,
+                dirtyW, dirtyH
+            );
+            ——获取图像像素
+
+            imageData : width, height, data
+        </p>
+
+        <p>
+            imageData = context.createImageData(w, h);
+            ——创建imageData
+
+        </p>
+    </code></pre>
+
+
+</div>
+<canvas id="canvas" style="border: 1px solid #f49912"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 500;
+        canvas.style.backgroundColor = '#111';
+
+        var context = canvas.getContext('2d');
+
+        var img = new Image();
+        img.src = '../../img/sprite_dna1_1.png';
+        img.onload = function () {
+            context.drawImage(img, 260, 400, 360,500, 100, 100, canvas.width / 2, canvas.height / 2);
+        };
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

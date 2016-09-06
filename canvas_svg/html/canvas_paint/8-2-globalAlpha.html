@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>globalAlpha</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);padding: 10px;">
+    <h3>
+        globalAlpha(全局透明度)
+    </h3>
+
+
+    <pre><xmp></xmp></pre>
+    <pre><code>
+        globalAlpha = 1(default)(全局透明度)
+
+        globalCompositeOperation = 'source-over'(default)图像重叠时效果
+            source-over ： 后绘制的图形在上
+            destination-over : 先绘制的图形在上
+            source-atop
+            destination-atop
+            source-in
+            destination-in
+            source-out
+            destination-out
+            lighter
+            copy
+            xor
+    </code></pre>
+
+
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+
+
+</div>
+<canvas id="canvas" style="border: 1px solid #f49912"></canvas>
+<canvas id="canvas1" style="border: 1px solid #f49912"></canvas>
+
+<style>
+    .buttons{
+        padding: 10px;
+    }
+    .buttons a{
+        text-decoration: none;
+        padding:5px;
+        margin: 30px 15px;
+        border: 1px solid #049fbb;
+        border-radius: 5px;
+    }
+</style>
+<div class="buttons" id="buttons">
+    <a href="javascript:void(0)">source-over</a>
+    <a href="javascript:void(0)">destination-over</a>
+    <a href="javascript:void(0)">source-atop</a>
+    <a href="javascript:void(0)">destination-atop</a>
+    <a href="javascript:void(0)">source-in</a>
+    <a href="javascript:void(0)">destination-in</a>
+    <a href="javascript:void(0)">source-out</a>
+    <a href="javascript:void(0)">destination-out</a>
+    <a href="javascript:void(0)">lighter</a>
+    <a href="javascript:void(0)">copy</a>
+    <a href="javascript:void(0)">xor</a>
+</div>
+
+<canvas id="canvas2" style="border: 1px solid #f49912"></canvas>
+<div class="buttons" id="buttons1">
+    <a href="javascript:void(0)">source-over</a>
+    <a href="javascript:void(0)">destination-over</a>
+    <a href="javascript:void(0)">lighter</a>
+    <a href="javascript:void(0)">xor</a>
+
+</div>
+<a href="javascript:void(0)" id="globalAlpha">globalAlpha(0.7)</a>
+</body>
+<script>
+    window.onload = function(){
+
+        alpha();
+
+        compositeOperation();
+
+        compositeOperationMoving();
+
+    }
+//透明度
+    function alpha(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+        context.globalAlpha = 0.7;
+
+        for(var i = 0; i < 100; i++){
+            var R = Math.floor(Math.random()*255);
+            var G = Math.floor(Math.random()*255);
+            var B = Math.floor(Math.random()*255);
+
+            context.fillStyle = 'rgb(' + R + ',' + G + ',' + B + ')';
+
+            context.beginPath();
+            context.arc(Math.random()*canvas.width, Math.random()*canvas.width, Math.random()*100, 0 ,Math.PI *2);
+            context.fill();
+        }
+    }
+
+//遮挡效果
+    function compositeOperation(){
+
+
+        //______compositeOperation
+
+        draw('source-over');
+
+        var buttons = document.getElementById('buttons').getElementsByTagName('a');
+        for(var i = 0; i<buttons.length; i++){
+            buttons[i].onclick = function(){
+                draw(this.text);
+                return false;
+            }
+        }
+
+    }
+
+    function draw(compositStyle){
+        var canvas = document.getElementById('canvas1');
+
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        context.clearRect(0,0, canvas.width, canvas.height);
+        context.font = 'bold 40px Arial';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = '#058';
+        context.fillText('globalCompositeOperation = ' + compositStyle, canvas.width/2, 60);
+
+        context.fillStyle = 'blue';
+        context.fillRect(300, 150, 500, 500);
+
+        context.globalCompositeOperation = compositStyle;
+        context.fillStyle = 'red';
+        context.beginPath();
+        context.moveTo(700, 250);
+        context.lineTo(1000, 750);
+        context.lineTo(400, 750);
+        context.closePath();
+        context.fill();
+    }
+//遮挡效果--移动的小球
+
+    function compositeOperationMoving(){
+
+
+        var buttons = document.getElementById('buttons1').getElementsByTagName('a');
+        var alphaBtn = document.getElementById('globalAlpha');
+        var timer;
+        var nowCompositStyle;
+        timer = moving('source-over');
+        nowCompositStyle = 'source-over';
+        for(var i = 0; i<buttons.length; i++){
+            buttons[i].onclick = function(){
+                timer && clearInterval(timer);
+                timer = moving(this.text);
+                nowCompositStyle = this.text;
+                return false;
+            }
+        }
+
+        alphaBtn.onclick = function(){
+            timer && clearInterval(timer);
+            timer = moving(nowCompositStyle, true);
+            return false;
+        }
+
+
+    }
+
+    function moving(compositStyle, isSetAlpha){
+        var canvas = document.getElementById('canvas2');
+
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        var aBall, balls = [];
+
+        if(isSetAlpha){context.globalAlpha = 0.7;}
+
+        for(var i = 0; i<120;i++){
+            var R = Math.floor( Math.random()*255);
+            var G = Math.floor( Math.random()*255);
+            var B = Math.floor( Math.random()*255);
+
+            var radius = Math.random() * 40 + 20;
+            aBall = {
+                color : 'rgb('+ R + ','+ G + ','+ B + ')',
+                radius : radius,
+                x : Math.random() * (canvas.width - 2*radius) + radius,
+                y : Math.random() * (canvas.height - 2*radius) + radius,
+                vx : (Math.random() * 5 + 5) * Math.pow(-1, Math.floor(Math.random() *100)),
+                vy : (Math.random() * 5 + 5) * Math.pow(-1, Math.floor(Math.random() *100)),
+            };
+
+            balls[i] = aBall;
+        }
+
+        var timer = setInterval(function(){
+            drawCircle(context, balls , compositStyle, isSetAlpha);
+            update(canvas.width, canvas.height, balls);
+        }, 100);
+
+        return timer;
+    }
+
+    function drawCircle(cxt, balls, compositStyle){
+        var canvas = cxt.canvas;
+        cxt.clearRect(0,0, canvas.width, canvas.height);
+
+        for(var i = 0; i<balls.length; i++ ){
+            cxt.globalCompositeOperation = compositStyle;
+            cxt.fillStyle = balls[i].color;
+            cxt.beginPath();
+            cxt.arc(balls[i].x, balls[i].y, balls[i].radius, 0 ,Math.PI *2);
+            cxt.closePath();
+            cxt.fill();
+        }
+
+    }
+
+    function update(canvasWidth, canvasHeight, balls){
+        for(var i = 0; i<balls.length; i++ ){
+            balls[i].x += balls[i].vx;
+            balls[i].y += balls[i].vy;
+
+            if(balls[i].x - balls[i].radius <= 0){
+                balls[i].vx = -balls[i].vx;
+                balls[i].x = balls[i].radius;
+            }
+            if(balls[i].x + balls[i].radius >= canvasWidth){
+                balls[i].vx = -balls[i].vx;
+                balls[i].x = canvasWidth - balls[i].radius;
+            }
+
+            if(balls[i].y - balls[i].radius <= 0){
+                balls[i].vy = -balls[i].vy;
+                balls[i].y = balls[i].radius;
+            }
+            if(balls[i].y + balls[i].radius >= canvasHeight){
+                balls[i].vy = -balls[i].vy;
+                balls[i].y = canvasHeight - balls[i].radius;
+            }
+        }
+    }
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

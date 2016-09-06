@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>svg</title>
+    <link rel="stylesheet" href="../../css/note.css"/>
+</head>
+<style></style>
+<body>
+
+<div class="pg-wrapper">
+
+
+    <h3 class="sub-title"> 1-2 、 基本图形和属性</h3>
+    <div class="des">
+        <dl>
+            <dt>基本图形</dt>
+            <dd>
+                <xmp style="display: inline; font-size: 16px;">
+<rect> 、<circle> 、<ellipse> 、<line> 、 <polyline> 、 <polygon>
+                </xmp>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>基本图形</dt>
+            <dd>
+                <p>
+                    fill 、 stroke 、 stroke-width 、 transform
+                </p>
+            </dd>
+        </dl>
+
+    </div>
+
+
+<!--矩形-->
+    <div class="eg-wrapper" data-title="1-2-1、矩形">
+
+        <pre data-lang="HTML">
+
+            <xmp>
+    <rect>
+        x : 起点x坐标
+        y : 起点y坐标
+        width : 宽
+        height : 高
+        rx : 圆角x
+        ry : 圆角y
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <rect x="20" y="20" width="100" height="60" rx="25" ry="25" fill="#39f"></rect>
+        </svg>
+
+    </div>
+
+<!--圆-->
+    <div class="eg-wrapper" data-title="1-2-2、圆">
+
+        <pre data-lang="HTML">
+
+            <xmp>
+                <circle>
+                    cx : 圆心x坐标
+                    cy : 圆心y坐标
+                    r : 半径
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <circle cx="100" cy="100" r="60"  fill="#39f"></circle>
+        </svg>
+
+    </div>
+
+<!--椭圆-->
+    <div class="eg-wrapper" data-title="1-2-3、椭圆">
+
+        <pre data-lang="HTML">
+
+            <xmp>
+                <ellipse>
+                    cx : 圆心x坐标
+                    cy : 圆心y坐标
+                    rx : x轴半径
+                    ry : y轴半径
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <ellipse cx="100" cy="100" rx="60" ry="45"  fill="#39f" transform="rotate(15)"></ellipse>
+        </svg>
+
+    </div>
+
+<!--直线-->
+    <div class="eg-wrapper" data-title="1-2-4、直线">
+
+        <pre data-lang="HTML">
+
+            <xmp>
+                <line>
+                    x1 : 起点x坐标
+                    y1 : 起点y坐标
+                    x2 : 终点x坐标
+                    y2 : 终点y坐标
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <line x1="0" y1="0" x2="200" y2="200" stroke="#39f" stroke-width="3" />
+        </svg>
+
+    </div>
+
+<!--折线-->
+    <div class="eg-wrapper" data-title="1-2-4、直线">
+
+        <pre data-lang="HTML">
+
+            <xmp>
+                <polyline>
+                    points ：x1 y1 x2 y2 ...
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <polyline points="0 50 50 0 200 100 50 200" stroke="#39f" fill="none"></polyline>
+        </svg>
+
+    </div>
+
+
+    <h3 class="sub-title"> 1-3 、 基本操作API</h3>
+    <div class="des">
+        <dl>
+            <dt>创建图形</dt>
+            <dd>
+                <p>
+                    document.createElementNS(ns, tagName)
+                </p>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>添加图形</dt>
+            <dd>
+                <p>
+                    element.appendChild(childElement)
+                </p>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>设置/获取图形</dt>
+            <dd>
+                <p>
+                    element.setAttribute(name, value)
+                    element.getAttribute(name)
+                </p>
+            </dd>
+        </dl>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

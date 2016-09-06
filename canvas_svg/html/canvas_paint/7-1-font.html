@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字体</title>
+
+</head>
+<style>
+    code{
+        font-size: 18px;
+    }
+</style>
+<body>
+<div style=" min-height: 15px; background-color: hsla(36, 34%, 73%, 0.6);">
+    <h3>
+        字体
+    </h3>
+
+    <pre>
+    <code>
+
+    context.font = 'bold 40px Arial';(默认 20px sans-serif);
+    context.font :
+        font-style :  normal(default) 、  italic(斜体) 、 oblique(倾斜字体);
+        font-variant : normal(default) 、 small-caps(作用于英文小写字母);
+        font- weight : lighter 、normal 、 bold 、 bolder (100-900,400:normal,700:bold);
+        font-size : 20px 、 2em 、150% 、xx-small 、 x-small 、 medium 、 large 、 x-large 、 xx-large;
+        font-family : 支持@font-face， 设置多种字体备选， web安全字体;
+    context.textAlign : left 、 center 、 right;
+    context.textBaseline : top 、 middle 、 bottom (alphabetic(default)拉丁文 、 ideographic汉字日语 、 hanging印度语);
+    context.fillText(string, x, y ,[maxlength]);
+    context.strokeText(string, x, y ,[maxlength]);
+    context.measureText(string).width
+
+    </code>
+    </pre>
+
+
+
+
+</div>
+
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 1200;
+
+        var context = canvas.getContext('2d');
+
+        context.font = 'bold 40px Arial';
+        context.fillStyle = '#058';
+        context.fillText('这是一段文字', 40, 100);
+
+
+        context.lineWidth = 1;
+        context.strokeStyle = '#058'
+        context.strokeText('这是一段文字', 40, 200, 200);
+
+        context.font = 'italic bold 40px sans-serif';
+        context.fillStyle = '#058';
+        context.fillText('这是一段文字(火狐不支持，Chrome下倾斜)', 0, 300);
+
+        context.font = 'small-caps bold 40px sans-serif';
+        context.fillStyle = '#058';
+        context.fillText('这是一段文字(火狐不支持，Chrome下倾斜)', 0, 400);
+
+        var bgImg = new Image();
+        bgImg.src = '../../img/bg.jpg';
+        bgImg.onload = function(){
+            var pattern = context.createPattern(bgImg, 'repeat');
+            context.fillStyle = pattern;
+            context.font = 'bold 100px Arial';
+//-------textAline
+            context.textAlign = 'left';
+            context.fillText('lalala', 400, 650);
+
+            context.textAlign = 'center';
+            context.strokeText('lalala', 400, 750);
+
+            context.textAlign = 'right';
+            context.fillText('lalala', 400, 850);
+
+            context.moveTo(400, 500);
+            context.lineTo(400, 900);
+            context.stroke();
+//-------textBaseline
+            context.textAlign = 'center';
+
+            context.textBaseline = 'top';
+            context.fillText('lalala', 100, 950, 150);
+            context.strokeText('lalala', 100, 950, 150);
+
+            context.textBaseline = 'middle';
+            context.fillText('lalala', 300, 950, 150);
+            context.strokeText('lalala', 300, 950, 150);
+
+            context.textBaseline = 'bottom';
+            context.fillText('lalala', 500, 950, 150);
+            context.strokeText('lalala', 500, 950, 150);
+
+            context.moveTo(0, 950);
+            context.lineTo(800, 950);
+            context.stroke();
+
+            context.font = 'bold 30px Arial';
+            context.textBaseline = 'middle';
+            var textWidth = context.measureText('啦啦啦').width;
+            context.fillText('上一句的长度是' + textWidth + 'px', 500, 1050);
+            context.strokeText('上一句的长度是' + textWidth + 'px', 500, 1050);
+        }
+
+
+
+    }
+
+
+
+</script>
+</html>

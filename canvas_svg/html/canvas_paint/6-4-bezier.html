@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贝塞尔曲线</title>
+
+</head>
+<style>
+    code{
+        font-size: 18px;
+    }
+</style>
+<body>
+<div style=" min-height: 15px; background-color: hsla(36, 34%, 73%, 0.6);">
+    <h3>
+        贝塞尔曲线
+    </h3>
+
+    <pre>
+    <code>
+    二次贝塞尔曲线
+    context.moveTo(x0, y0);
+        指定起始点
+    context.quadraticCurveTo(
+        x1,y1,
+        x2,y2
+    )
+        x1,y1,控制点坐标
+        x2,y2 结束点坐标
+        （曲线不是圆弧）
+
+    </code>
+    </pre>
+
+    <a href=" http://tinyurl.com/html5quadratic" target="_blank"> http://tinyurl.com/html5quadratic</a>
+
+
+
+    <pre>
+    <code>
+    三次贝塞尔曲线
+    context.moveTo(x0, y0);
+        指定起始点
+    context.bezierCurveTo(
+        x1,y1,
+        x2,y2，
+        x3,y3，
+    )
+        x1,y1,控制点1坐标
+        x2,y2 控制点2坐标
+        x3,y3 结束点坐标
+        （曲线不是圆弧）
+    </code>
+    </pre>
+
+    <a href=" http://tinyurl.com/html5quadratic" target="_blank"> http://tinyurl.com/html5bezier</a>
+    <br>
+    <a href="http://blogs.sitepointstatic.com/examples/tech/canvas-curves/bezier-curve.html">http://blogs.sitepointstatic.com/examples/tech/canvas-curves/bezier-curve.html</a>
+
+</div>
+
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        fillMoon(context, 1.1, 400, 400, 1, 0);
+
+    }
+
+
+
+    function fillMoon(cxt, d, x, y, R, rot, fillColor){
+        cxt.save();
+        cxt.translate(x, y);
+        cxt.rotate(rot * Math.PI /180 );
+        cxt.scale(R, R);
+        pathMoon(cxt, d);
+        cxt.fillStyle = fillColor || '#fb5';
+        cxt.fill();
+        cxt.restore();
+    }
+
+    function pathMoon(cxt, d){
+        cxt.beginPath();
+        cxt.moveTo(239, 93);
+        cxt.bezierCurveTo(378, 21, 374, 266, 243, 195);
+        cxt.moveTo(243, 195);
+        cxt.quadraticCurveTo(256, 144, 239, 93 );
+        cxt.stroke()
+        cxt.closePath();
+    }
+
+
+
+
+</script>
+</html>

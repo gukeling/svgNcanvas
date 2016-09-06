@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐变</title>
+
+</head>
+<body>
+<div style=" min-height: 15px; background-color: hsla(36, 34%, 73%, 0.6);">
+    <h3>
+        fillstyle : color
+    </h3>
+    <p>#fff</p>
+    <p>#D2BFA3</p>
+    <p>rgb(210, 191, 163)</p>
+    <p>rgba(210, 191, 163, 0.6)</p>
+    <p>hsl(36, 34%, 73%)</p>
+    <pre>
+        <xmp>
+        语法：<length> || <percentage> || <percentage>
+            取值：<length> ：Hue(色调)。 0(或360)表示红色，120表示绿色，240表示蓝色，当然可取其他数值来确定其它颜色；
+            <percentage> ：Saturation(饱和度)。 取值为0%到100%之间的值；
+                <percentage> ：Lightness(亮度)。 取值为0%到100%之间的值；
+
+        </xmp>
+    </pre>
+
+    <p>hsla(36, 34%, 73%, 0.6)</p>
+
+    <h3>
+        fillstyle : gradient
+    </h3>
+
+    <pre>
+        <code>
+
+            Linear Gradient
+
+                1.var grd = context.createLinearGradient(xstart, ystart, xend, yend);
+                ————设置渐变线
+                2.grd.addColorStop(stop, color);
+                ————stop: float值，设置关键色的位置
+                ————color: 设置颜色
+
+            Radial Gradient
+
+                1.var grd = context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+                ————x0, y0, r0: 第一个圆的圆心坐标和半径
+                ————x1, y1, r1: 第二个圆的圆心坐标和半径
+
+                2.grd.addColorStop(stop, color);
+        </code>
+    </pre>
+
+</div>
+
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        context.beginPath();
+        var linearGradient = context.createLinearGradient(0, 0, canvas.width/2, canvas.height/2);
+        linearGradient.addColorStop(0.0, 'white');
+        linearGradient.addColorStop(0.25, 'yellow');
+        linearGradient.addColorStop(0.5, 'green');
+        linearGradient.addColorStop(0.75, 'blue');
+        linearGradient.addColorStop(1.0, 'black');
+        context.fillStyle = linearGradient;
+        context.closePath();
+        context.fillRect(0,0, canvas.width/2, canvas.height/2);
+
+        context.beginPath();
+        var radialGradient = context.createRadialGradient(canvas.width * 0.75, canvas.height * 0.75, 0, canvas.width * 0.75, canvas.height * 0.75 ,canvas.width/4);
+        radialGradient.addColorStop(0.0, 'white');
+        radialGradient.addColorStop(0.25, 'yellow');
+        radialGradient.addColorStop(0.5, 'green');
+        radialGradient.addColorStop(0.75, 'blue');
+        radialGradient.addColorStop(1.0, 'black');
+        context.fillStyle = radialGradient;
+        context.closePath();
+        context.fillRect(canvas.width/2, canvas.height/2, canvas.width, canvas.height);
+
+    }
+
+
+</script>
+</html>

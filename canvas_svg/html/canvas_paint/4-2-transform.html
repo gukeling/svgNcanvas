@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图形变换</title>
+</head>
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto">
+    当前浏览器不支持canvas
+</canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        context.fillStyle = 'black';
+        context.fillRect(0,0, canvas.width, canvas.height);
+
+        for(var i = 0; i < 200; i ++){
+            var R = Math.random() * 10 + 10;
+            var r = R /(2.4- Math.random());
+
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height;
+            var rotate = Math.random() * 360;
+
+            drawStar(context, x, y, R, rotate);
+        }
+
+       /* context.save();
+        context.fillStyle = 'red';
+        context.translate(100, 100);
+        context.fillRect(0,0, 400, 400);
+        //context.translate(-100, -100);
+        context.restore();
+
+        //图形变换是叠加的
+        context.save();
+        context.fillStyle = 'green';
+        context.translate(300, 300);
+        context.fillRect(0,0, 400, 400);
+        //context.translate(-300, -300);
+        context.restore();*/
+
+
+
+
+    }
+
+    function drawStar(cxt, x, y, R, rot){
+
+        cxt.save();
+
+        cxt.translate(x, y);
+        cxt.rotate(rot / 180 * Math.PI);
+        cxt.scale(R, R);
+
+        starPath(cxt);
+
+        cxt.fillStyle = '#fb3';
+//        cxt.strokeStyle = '#fd5';
+//        cxt.lineWidth = 3;
+        cxt.lineJoin = 'round';
+
+        cxt.fill();
+//        cxt.stroke();
+
+        cxt.restore();
+
+    }
+
+    function starPath(cxt){
+        cxt.beginPath();
+        for(i = 0; i < 5; i++){
+            cxt.lineTo(Math.cos( (18 + i*72)/180 * Math.PI), -Math.sin( (18 + i*72)/180 * Math.PI));
+            cxt.lineTo(Math.cos( (54 + i*72)/180 * Math.PI ) * 0.5, -Math.sin( (54 + i*72)/180 * Math.PI) * 0.5);
+        }
+        cxt.closePath();
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非零环绕原则</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);">
+    <h3>
+        非零环绕原则
+        context.fill()
+    </h3>
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+    <canvas id="canvas0" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+
+</div>
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+</body>
+<script>
+
+
+    window.onload = function(){
+        showPic();
+        drawCircle();
+
+    }
+//
+    function showPic(){
+        var canvas = document.getElementById('canvas0');
+        var context = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 500;
+
+
+        var backgroundImage = new  Image();
+        backgroundImage.src = '../../img/fill-principle.png';
+        backgroundImage.onload = function(){
+            var pattern = context.createPattern(backgroundImage, 'no-repeat');
+            context.fillStyle = pattern;
+
+            context.fillRect(0,0, canvas.width, canvas.height);
+        };
+    }
+
+    function drawCircle(){
+        var canvas = document.getElementById('canvas');
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.arc(400, 400, 300, 0, Math.PI * 2, false);
+        context.arc(400, 400, 150, 0, Math.PI * 2, true);
+        context.closePath();
+
+        context.fillStyle = '#058';
+        context.shadowColor = 'grey';
+        context.shadowOffsetX = 10;
+        context.shadowOffsetY = 10;
+        context.shadowBlur = 10;
+
+        context.fill();
+    }
+
+
+</script>
+</html>

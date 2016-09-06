@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>svg 文本</title>
+    <link rel="stylesheet" href="../../css/note.css"/>
+</head>
+<style></style>
+<body>
+
+<div class="pg-wrapper">
+
+
+    <h3 class="sub-title">五 、 SVG 文本</h3>
+
+    <section>
+        <h4 class="title-level-1">5-1 、 <xmp style="display: inline"><text></xmp>和<xmp style="display: inline"><tspan></xmp>创建文本</h4>
+
+        <div class="des bg-light level-1">
+
+            <ul class="level-1">
+                <li>x 和 y 属性 - 定位标准</li>
+                <li>dx 和 dy 属性 - 字形偏移</li>
+                <li>style 属性 - 设置样式</li>
+            </ul>
+
+            <!--text-->
+
+            <dl>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="800" height="400"
+                     viewBox="-0.5 -0.5 800 400"
+                     style="background: #fff">
+
+                    <defs>
+                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+                        </pattern>
+                    </defs>
+
+                    <rect width="800" height="400" fill="url(#grid)"></rect>
+                    <text x="100" y="100" dx="0 20 40 60" dy="0 20 40 60" style="font-size: 50px; font-family: Arial">ABCDE</text>
+                    <path d="M100,0 V200 M 0,100 H200" stroke="red"></path>
+                </svg>
+            </dl>
+
+            <dl>
+                <div style="background: #fff;" class="eg-wrapper">
+                <pre data-lang="code" class="close">
+<xmp>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="1000" height="500"
+         viewBox="-100.5 -250.5 1000 500"
+         style="background: #fff">
+
+        <defs>
+            <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+            </pattern>
+        </defs>
+
+        <rect transform="translate(-100,-350)" width="1200" height="1000" fill="url(#grid)"></rect>
+        <g ><!--transform="translate(0 400)"-->
+            <text id="sintext" x="0" y="0"  style="font-size: 14px; font-family: Arial">ABCDEFGHIJKLMNOPQRSTUVWXYZ</text><!--x="100" y="100"-->
+            <path d="M0,-100 V100 M -100,0 H100" stroke="red"></path>
+        </g>
+
+    </svg>
+
+    <script>
+        var textWave = (function(){
+            //x = [20, 20, 20,...]
+            //y = s * sin(w * x + t)
+            var n = 26;
+            var x = [];
+            var y = [];
+            var i = -1;
+            var s = 100;
+            var w = Math.PI * 0.0065;
+
+            var t = 0;
+
+            var _sinxarr = [];
+
+            while(i++ < n) x[i] = i ? 20 : 0;
+
+            function arrage(t){
+
+                _sinxarr = x.map(function(val, index){
+
+                    //console.log((w * val * index + t)/Math.PI + " " + Math.sin(w * val * index + t))
+
+                    return - s * Math.sin(w * val * index + t);
+                });//得到的是y点的坐标，不是dy
+
+                y = _sinxarr.map(function(val, index){
+                    return index ? _sinxarr[index] - _sinxarr[index-1] : _sinxarr[index];
+                });
+
+                /*for(i=0;i<n;i++){
+
+                 var _sinx = - s * Math.sin(w * x[i] * i + t);
+                 _sinxarr[i] = _sinx;
+                 console.log(x[i] + " " + i + " " + t);
+                 console.log(w * x[i] * i + t)
+                 console.log(i);
+                 console.log(y);
+                 y[i] = i > 0 ? _sinxarr[i] - _sinxarr[i-1] : _sinxarr[i];
+                 }*/
+
+            }
+
+            function render(){
+                sintext.setAttribute('dx', x.join(' '));
+                sintext.setAttribute('dy', y.join(' '));
+            }
+
+
+            function frame(){
+                t += 0.01;
+                arrage(t);
+                render();
+                requestAnimationFrame(frame);
+            }
+            frame();
+        })();
+    </script>
+</xmp>
+                </pre>
+                </div>
+            </dl>
+
+            <dl>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1000" height="500"
+                     viewBox="-100.5 -250.5 1000 500"
+                     style="background: #fff">
+
+                    <defs>
+                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+                        </pattern>
+                    </defs>
+
+                    <rect transform="translate(-100,-250)" width="1200" height="1000" fill="url(#grid)"></rect>
+                    <g ><!--transform="translate(0 400)"-->
+                        <text id="sintext" x="0" y="0"  style="font-size: 14px; font-family: Arial">ABCDEFGHIJKLMNOPQRSTUVWXYZ</text><!--x="100" y="100"-->
+                        <path d="M0,-100 V100 M -100,0 H100" stroke="red"></path>
+                    </g>
+
+                </svg>
+
+                <script>
+                    //x = [20, 20, 20,...]
+                    //y = s * sin(w * x + t)
+                    var n = 26;
+                    var x = [];
+                    var y = [];
+                    var i = -1;
+                    var s = 100;
+                    var w = Math.PI * 0.0065;
+
+                    var t = 0;
+
+                    var _sinxarr = [];
+
+                    while(i++ < n) x[i] = i ? 20 : 0;
+
+                    function arrage(t){
+
+                        _sinxarr = x.map(function(val, index){
+
+                            //console.log((w * val * index + t)/Math.PI + " " + Math.sin(w * val * index + t))
+
+                            return - s * Math.sin(w * val * index + t);
+                        });//得到的是y点的坐标，不是dy
+
+                        y = _sinxarr.map(function(val, index){
+                            return index ? _sinxarr[index] - _sinxarr[index-1] : _sinxarr[index];
+                        });
+
+                        /*for(i=0;i<n;i++){
+
+                         var _sinx = - s * Math.sin(w * x[i] * i + t);
+                         _sinxarr[i] = _sinx;
+                         console.log(x[i] + " " + i + " " + t);
+                         console.log(w * x[i] * i + t)
+                         console.log(i);
+                         console.log(y);
+                         y[i] = i > 0 ? _sinxarr[i] - _sinxarr[i-1] : _sinxarr[i];
+                         }*/
+
+                    }
+
+                    function render(){
+                        sintext.setAttribute('dx', x.join(' '));
+                        sintext.setAttribute('dy', y.join(' '));
+                    }
+
+
+                    function frame(){
+                        t += 0.01;
+                        arrage(t);
+                        render();
+                        requestAnimationFrame(frame);
+                    }
+                    frame();
+
+                </script>
+
+            </dl>
+
+            <!--tspan-->
+            <dl>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="800" height="400"
+                     viewBox="-0.5 -0.5 800 400"
+                     style="background: #fff">
+
+                    <defs>
+                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+                        </pattern>
+                    </defs>
+
+                    <rect width="1200" height="1000" fill="url(#grid)"></rect>
+                    <text x="100" y="100" style="font-size: 50px; font-family: Arial">
+                        <tspan fill="red" dy="-20 20">AB</tspan><!--dx dy覆盖规则
+                        --><tspan stroke="green" fill="none">CDE</tspan>
+
+                    </text>
+
+                    <text x="100" y="200" dy="-20 20" style="font-size: 50px; font-family: Arial"> ABC</text>
+                    <path d="M100,0 V200 M 0,100 H200 M 0, 200 h 200" stroke="red"></path>
+                </svg>
+            </dl>
+
+            <dl>
+                <div style="background: #fff;" class="eg-wrapper">
+                <pre data-lang="code" class="close">
+<xmp>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="1000" height="500"
+         viewBox="-100.5 -250.5 1000 500"
+         style="background: #fff">
+
+        <defs>
+            <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+            </pattern>
+        </defs>
+
+        <rect transform="translate(-100,-250)" width="1200" height="1000" fill="url(#grid)"></rect>
+        <g ><!--transform="translate(0 400)"-->
+            <text id="ranbowtext" x="0" y="0"  style="font-size: 14px; font-family: Arial"></text>
+            <path d="M0,-100 V100 M -100,0 H100" stroke="red"></path>
+        </g>
+
+    </svg>
+
+    <script>
+        var tspanRainbow = (function(){
+            //x = [20, 20, 20,...]
+            //y = s * sin(w * x + t)
+
+            var NS = 'http://www.w3.org/2000/svg';
+            var text = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var n = text.length;
+            var x = [];
+            var y = [];
+            var i = n;
+            var s = 100;
+            var w = Math.PI * 0.0065;
+
+            var t = 0;
+
+            var _sinxarr = [];
+
+            while(i--){
+
+                x[n-i-1] = n-i-1 ? 20 : 0;
+                var tspan = document.createElementNS(NS, 'tspan');
+                tspan.textContent = text[n-i-1];
+
+                ranbowtext.appendChild(tspan);
+                var h = Math.round(360/26 * i);
+                tspan.setAttribute('fill','hsl(' + h + ', 100%, 80%');
+            }
+
+//            console.log(x)
+
+            function arrage(t){
+
+                _sinxarr = x.map(function(val, index){
+
+                    //console.log((w * val * index + t)/Math.PI + " " + Math.sin(w * val * index + t))
+
+                    return - s * Math.sin(w * val * index + t);
+                });//得到的是y点的坐标，不是dy
+
+                y = _sinxarr.map(function(val, index){
+                    return index ? _sinxarr[index] - _sinxarr[index-1] : _sinxarr[index];
+                });
+
+                /*for(i=0;i<n;i++){
+
+                 var _sinx = - s * Math.sin(w * x[i] * i + t);
+                 _sinxarr[i] = _sinx;
+                 console.log(x[i] + " " + i + " " + t);
+                 console.log(w * x[i] * i + t)
+                 console.log(i);
+                 console.log(y);
+                 y[i] = i > 0 ? _sinxarr[i] - _sinxarr[i-1] : _sinxarr[i];
+                 }*/
+
+            }
+
+            function render(){
+                ranbowtext.setAttribute('dx', x.join(' '));
+                ranbowtext.setAttribute('dy', y.join(' '));
+            }
+
+
+            function frame(){
+                t += 0.01;
+                arrage(t);
+                render();
+                requestAnimationFrame(frame);
+            }
+            frame();
+        })();
+
+    </script>
+</xmp>
+                </pre>
+                </div>
+            </dl>
+
+            <dl>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1000" height="500"
+                     viewBox="-100.5 -250.5 1000 500"
+                     style="background: #fff">
+
+                    <defs>
+                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path stroke="#aaa" fill="none" d="M0,0h20v20" ></path>
+                        </pattern>
+                    </defs>
+
+                    <rect transform="translate(-100,-250)" width="1200" height="500" fill="url(#grid)"></rect>
+                    <g ><!--transform="translate(0 400)"-->
+                        <text id="ranbowtext" x="0" y="0"  style="font-size: 14px; font-family: Arial"></text>
+                        <path d="M0,-100 V100 M -100,0 H100" stroke="red"></path>
+                    </g>
+
+                </svg>
+
+                <script>
+                    var tspanRainbow = (function(){
+                        //x = [20, 20, 20,...]
+                        //y = s * sin(w * x + t)
+
+                        var NS = 'http://www.w3.org/2000/svg';
+                        var text = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                        var n = text.length;
+                        var x = [];
+                        var y = [];
+                        var i = n;
+                        var s = 100;
+                        var w = Math.PI * 0.0065;
+
+                        var t = 0;
+
+                        var _sinxarr = [];
+
+                        while(i--){
+
+                            x[n-i-1] = n-i-1 ? 20 : 0;
+                            var tspan = document.createElementNS(NS, 'tspan');
+                            tspan.textContent = text[n-i-1];
+
+                            ranbowtext.appendChild(tspan);
+                            var h = Math.round(360/26 * i);
+                            tspan.setAttribute('fill','hsl(' + h + ', 100%, 80%');
+                        }
+
+//                        console.log(x)
+
+                        function arrage(t){
+
+                            _sinxarr = x.map(function(val, index){
+
+                                //console.log((w * val * index + t)/Math.PI + " " + Math.sin(w * val * index + t))
+
+                                return - s * Math.sin(w * val * index + t);
+                            });//得到的是y点的坐标，不是dy
+
+                            y = _sinxarr.map(function(val, index){
+                                return index ? _sinxarr[index] - _sinxarr[index-1] : _sinxarr[index];
+                            });
+
+                            /*for(i=0;i<n;i++){
+
+                             var _sinx = - s * Math.sin(w * x[i] * i + t);
+                             _sinxarr[i] = _sinx;
+                             console.log(x[i] + " " + i + " " + t);
+                             console.log(w * x[i] * i + t)
+                             console.log(i);
+                             console.log(y);
+                             y[i] = i > 0 ? _sinxarr[i] - _sinxarr[i-1] : _sinxarr[i];
+                             }*/
+
+                        }
+
+                        function render(){
+                            ranbowtext.setAttribute('dx', x.join(' '));
+                            ranbowtext.setAttribute('dy', y.join(' '));
+                        }
+
+
+                        function frame(){
+                            t += 0.01;
+                            arrage(t);
+                            render();
+                            requestAnimationFrame(frame);
+                        }
+                        frame();
+                    })();
+
+                </script>
+
+            </dl>
+
+
+        </div>
+
+
+    </section>
+
+    <section>
+        <h4 class="title-level-1">5-2 、垂直居中问题</h4>
+
+        <ul class="des bg-light level-1">
+            <li>text-anchor - 水平居中属性</li>
+            <li>dominant-baseline 属性（<a href="http://www.w3.org/TR/SVG/text.html#DominantBaselineProperty" target="_blank">http://www.w3.org/TR/SVG/text.html#DominantBaselineProperty</a>）</li>
+            <li>自己模拟</li>
+        </ul>
+        <!--eg demo-->
+
+        <dl>
+            <div style="background: #fff;" class="eg-wrapper">
+
+                <!--代码-->
+                <div>
+                    <pre data-lang="code" class="close">
+<xmp>
+    <div style="background: #fff; padding: 30px 50px;">
+        <select id="ta">
+            <option value="start">start</option>
+            <option value="end">end</option>
+            <option value="middle">middle</option>
+        </select>
+
+        <select id="select"></select>
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="1000" height="500"
+             viewBox="-200.5 -250.5 1000 500"
+             style="background: #fff;display: block;border: 1px solid #cdcdcd;">
+
+            <path stroke="green" d="M -150 0.5 150 0.5 M 0.5 -100 v 200"></path>
+            <text id="text" x="0" y="0" fill="red" font-size="50">一些文字(谷歌支持)</text>
+            <rect id="rect" stroke="blue" fill="none"></rect>
+
+        </svg>
+
+        <script>
+            var composeTextType = (function(){
+
+                var values = "auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | text-top | text-bottom".split(' | ')
+
+                values.forEach(function(value){
+                    var opt = document.createElement('option');
+                    opt.value = opt.textContent = value;
+                    select.appendChild(opt);
+                });
+
+
+
+                ta.addEventListener('input', function(){
+                    text.setAttribute('text-anchor', ta.value);
+                });
+
+                select.addEventListener('input', function(){
+                    text.setAttribute('dominant-baseline',select.value);
+                    var box = text.getBBox();
+                    rect.setAttribute('x', box.x);
+                    rect.setAttribute('y', box.y);
+                    rect.setAttribute('width', box.width);
+                    rect.setAttribute('height', box.height);
+                });
+
+            })();
+
+        </script>
+    </div>
+</xmp>
+                    </pre>
+                </div>
+
+                <!--效果展示-->
+                <div>
+                    <select id="ta">
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="middle">middle</option>
+                    </select>
+
+                    <select id="select"></select>
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="1000" height="500"
+                         viewBox="-200.5 -250.5 1000 500"
+                         style="background: #fff;display: block;border: 1px solid #cdcdcd;">
+
+                        <path stroke="green" d="M -150 0.5 150 0.5 M 0.5 -100 v 200"></path>
+                        <text id="text" x="0" y="0" fill="red" font-size="50">一些文字(谷歌支持)</text>
+                        <rect id="rect" stroke="blue" fill="none"></rect>
+
+                    </svg>
+
+                    <script>
+                        var composeTextType = (function(){
+
+                            var values = "auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | text-top | text-bottom".split(' | ')
+
+                            values.forEach(function(value){
+                                var opt = document.createElement('option');
+                                opt.value = opt.textContent = value;
+                                select.appendChild(opt);
+                            });
+
+
+
+                            ta.addEventListener('input', function(){
+                                text.setAttribute('text-anchor', ta.value);
+                            });
+
+                            select.addEventListener('input', function(){
+                                text.setAttribute('dominant-baseline',select.value);
+                                var box = text.getBBox();
+                                rect.setAttribute('x', box.x);
+                                rect.setAttribute('y', box.y);
+                                rect.setAttribute('width', box.width);
+                                rect.setAttribute('height', box.height);
+                            });
+
+                        })();
+
+                    </script>
+                </div>
+
+
+            </div>
+        </dl>
+
+        <div class="des bg-light level-1">
+            <p class="level-1">自制垂直居中效果（原理图）：</p>
+
+            <div class="level-1">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1000" height="500"
+                     viewBox="-400.5 -250.5 1000 500"
+                     style="background: #fff;display: block;border: 1px solid #cdcdcd;">
+
+                    <defs>
+                        <g id="guideline">
+                            <path d="M 0, 0 h -300" stroke="purple" stroke-dasharray="8, 5"></path>
+
+                        </g>
+                    </defs>
+
+
+                    <path stroke="green" d="M -150 0.5 150 0.5 M 0.5 -100 v 200"></path>
+                    <text id="egtext" x="0" y="0" fill="#666" font-size="80">一些文字</text>
+                    <path d="M-300,0h800" stroke="red"></path>
+                    <text x="360" y="-10" fill="red">y 文本基线</text>
+                    <rect id="egrect" stroke="blue" fill="none"></rect>
+                    <text id="bboxtext" x="200" y="0" fill="blue">bbox</text>
+
+                    <g  id="use1">
+                        <use xlink:href="#guideline"></use>
+                        <text x="-360" y="0" fill="purple">顶线</text>
+                        <text x="-280" y="-10">b.y</text>
+                    </g>
+
+                    <g  id="use2"  transform="translate(0, 20)">
+                        <use xlink:href="#guideline"></use>
+                        <text x="-360" y="0" fill="purple">中线</text>
+                        <text x="-280" y="-10">b.y+b.h/2</text>
+                    </g>
+
+                    <g  id="use3" transform="translate(0, 40)">
+                        <use xlink:href="#guideline"></use>
+                        <text x="-360" y="0" fill="purple">底线</text>
+                        <text x="-280" y="-10">b.y+b.h</text>
+                    </g>
+
+                </svg>
+
+                <script>
+                    (function(){
+                        var box = egtext.getBBox();
+
+                        egrect.setAttribute('x', box.x);
+                        egrect.setAttribute('y', box.y);
+                        egrect.setAttribute('width', box.width);
+                        egrect.setAttribute('height', box.height);
+
+                        use1.setAttribute('transform','translate(0,'  + box.y + ')');
+                        use2.setAttribute('transform','translate(0,'  + (box.y + box.height / 2) + ')');
+                        use3.setAttribute('transform','translate(0,'  + (box.y + box.height) + ')');
+
+//                        console.log(use2.getAttributeNode('text'));
+
+                        bboxtext.setAttribute('y', box.y - 10);
+                    })();
+                </script>
+
+            </div>
+
+        </div>
+
+        <!--垂直居中-->
+        <dl>
+            <!--代码-->
+            <div style="background: #fff;" class="eg-wrapper">
+                <pre data-lang="code" class="close">
+<xmp>
+    <div style="background: #fff; padding: 30px 50px;">
+        <select id="tanew">
+            <option value="start">start</option>
+            <option value="end">end</option>
+            <option value="middle">middle</option>
+        </select>
+
+        <select id="selectnew">
+            <option value="top">top</option>
+            <option value="middle">middle</option>
+            <option value="bottom">bottom</option>
+        </select>
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="1000" height="500"
+             viewBox="-200.5 -250.5 1000 500"
+             style="background: #fff;display: block;border: 1px solid #cdcdcd;">
+
+            <path stroke="green" d="M -150 0.5 150 0.5 M 0.5 -100 v 200"></path>
+            <text id="textnew" x="0" y="0" fill="red" font-size="50">一些文字</text>
+            <rect id="rectnew" stroke="blue" fill="none"></rect>
+
+        </svg>
+
+        <script>
+            var composeTextType2 = (function(){
+
+
+
+                tanew.addEventListener('input', function(){
+                    textnew.setAttribute('text-anchor', tanew.value);
+                    framed();
+                });
+
+                selectnew.addEventListener('input', function(){
+                    framed();
+                });
+
+                var framed = function(){
+                    textnew.setAttribute('dy', 0);
+                    textnew.setAttribute('dy',getAlignmentDy(selectnew.value));
+                    var box = textnew.getBBox();
+
+                    rectnew.setAttribute('x', box.x);
+                    rectnew.setAttribute('y', box.y);
+                    rectnew.setAttribute('width', box.width);
+                    rectnew.setAttribute('height', box.height);
+                };
+
+                var getAlignmentDy = function(value){
+                    var box = textnew.getBBox();
+                    var y = + textnew.getAttribute('y');
+                    switch(value){
+                        case 'top' : return y - box.y ;
+                        case 'middle' : return y - box.y - box.height / 2;
+                        case 'bottom' : return y - box.y - box.height;
+                    }
+                };
+
+                framed();
+
+            })();
+
+        </script>
+    </div>
+</xmp>
+                </pre>
+            </div>
+
+            <!--演示效果-->
+            <div style="background: #fff; padding: 30px 50px;">
+                <select id="tanew">
+                    <option value="start">start</option>
+                    <option value="end">end</option>
+                    <option value="middle">middle</option>
+                </select>
+
+                <select id="selectnew">
+                    <option value="top">top</option>
+                    <option value="middle">middle</option>
+                    <option value="bottom">bottom</option>
+                </select>
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="1000" height="500"
+                     viewBox="-200.5 -250.5 1000 500"
+                     style="background: #fff;display: block;border: 1px solid #cdcdcd;">
+
+                    <path stroke="green" d="M -150 0.5 150 0.5 M 0.5 -100 v 200"></path>
+                    <text id="textnew" x="0" y="0" fill="red" font-size="50">一些文字</text>
+                    <rect id="rectnew" stroke="blue" fill="none"></rect>
+
+                </svg>
+
+                <script>
+                    var composeTextType2 = (function(){
+
+
+
+                        tanew.addEventListener('input', function(){
+                            textnew.setAttribute('text-anchor', tanew.value);
+                            framed();
+                        });
+
+                        selectnew.addEventListener('input', function(){
+                            framed();
+                        });
+
+                        var framed = function(){
+                            textnew.setAttribute('dy', 0);
+                            textnew.setAttribute('dy',getAlignmentDy(selectnew.value));
+                            var box = textnew.getBBox();
+
+                            rectnew.setAttribute('x', box.x);
+                            rectnew.setAttribute('y', box.y);
+                            rectnew.setAttribute('width', box.width);
+                            rectnew.setAttribute('height', box.height);
+                        };
+
+                        var getAlignmentDy = function(value){
+                            var box = textnew.getBBox();
+                            var y = + textnew.getAttribute('y');
+                            switch(value){
+                                case 'top' : return y - box.y ;
+                                case 'middle' : return y - box.y - box.height / 2;
+                                case 'bottom' : return y - box.y - box.height;
+                            }
+                        };
+
+                        framed();
+
+                    })();
+
+                </script>
+            </div>
+        </dl>
+
+
+
+    </section>
+
+    <section>
+        <h4 class="title-level-1">5-3 、<xmp style="display: inline"><textpath></xmp> - 路径文本 -让文本在指定路径上排列</h4>
+        <ul class="des bg-light level-1">
+            <li>使用方法</li>
+            <li>布局原理</li>
+            <li>定位属性 x, y, dx, dy 的作用</li>
+            <li>脚本控制</li>
+        </ul>
+
+        <div class="des bg-light level-1">
+            <dl>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML" class="close">
+                <xmp>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff" >
+                        <path id="path1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+                        <text style="font-size: 24px;">
+                            <textPath xlink:href="#path1">
+                                这个文字先上去，又下来了，Upside down in english!
+                            </textPath>
+
+                        </text>
+                    </svg>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff" >
+                        <path id="path1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+                        <text style="font-size: 24px;">
+                            <textPath xlink:href="#path1">
+                                这个文字先上去，又下来了，Upside down in english!
+                            </textPath>
+
+                        </text>
+                    </svg>
+                </dd>
+
+
+            </dl>
+        </div>
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>• x、text-anchor 和 startOffset 属性</dt>
+                <dd>‣ 确定排列起始位置</dd>
+            </dl>
+            <dl>
+                <dt>• dx, dy 属性</dt>
+                <dd>‣ 切线和法线方向的偏移</dd>
+            </dl>
+        </div>
+
+        <!--居中显示例子-->
+        <div class="des bg-light level-1">
+            <dl>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+                        <pre data-lang="HTML" class="close">
+                            <xmp>
+    <form id="ctrl">
+
+        <label>x:</label>
+        <input ctrl="x" type="range" value="0" min="-200" max="200">
+
+        <label>y:</label>
+        <input ctrl="y" type="range" value="0" min="-200" max="200">
+
+        <label>text-anchor:</label>
+        <select ctrl="text-anchor">
+            <option value="start">start</option>
+            <option value="middle">middle</option>
+            <option value="end">end</option>
+        </select>
+
+        <label>startOffset:</label>
+        <input ctrl="startOffset" type="range" value="0" min="0" max="100">
+
+        <button type="reset">Reset</button>
+
+    </form>
+
+    <svg id="textPathEg" xmlns="http://www.w3.org/2000/svg"
+         width="800" height="600"
+         viewBox="-0.5 -0.5 800 600"
+         style="background: #fff" >
+        <path id="egpath" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+        <text style="font-size: 24px;">
+            <textPath xlink:href="#egpath">
+                123456789
+            </textPath>
+
+        </text>
+    </svg>
+
+    <script>
+        (function(){
+            var ctrl = document.getElementById('ctrl');
+            var text = textPathEg.querySelector('text');
+            var textPath = text.firstElementChild;
+
+            function update(target){
+                var attr = target.getAttribute('ctrl');
+                if(!attr) return;
+                if(attr == 'startOffset'){
+                    textPath.setAttribute(attr, target.value + '%');
+                }else{
+                    text.setAttribute(attr, target.value);
+                }
+            }
+
+            ctrl.addEventListener('input', function(e){
+                update(e.target);
+            });
+
+            ctrl.addEventListener('reset', function(e){
+                setTimeout(function(){
+                    var list = document.querySelectorAll('#ctrl *[ctrl]');
+                    [].slice.call(list).forEach(update);
+                });
+            });
+
+
+
+        })()
+
+
+    </script>
+                            </xmp>
+                        </pre>
+                    </div>
+                </dd>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+
+                    <form id="ctrl">
+
+                        <label>x:</label>
+                        <input ctrl="x" type="range" value="0" min="-200" max="200">
+
+                        <label>y:</label>
+                        <input ctrl="y" type="range" value="0" min="-200" max="200">
+
+                        <label>text-anchor:</label>
+                        <select ctrl="text-anchor">
+                            <option value="start">start</option>
+                            <option value="middle">middle</option>
+                            <option value="end">end</option>
+                        </select>
+
+                        <label>startOffset:</label>
+                        <input ctrl="startOffset" type="range" value="0" min="0" max="100">
+
+                        <button type="reset">Reset</button>
+
+                    </form>
+
+                    <svg id="textPathEg" xmlns="http://www.w3.org/2000/svg"
+                         width="800" height="600"
+                         viewBox="-0.5 -0.5 800 600"
+                         style="background: #fff" >
+                        <path id="egpath" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+                        <text style="font-size: 24px;">
+                            <textPath xlink:href="#egpath">
+                                123456789
+                            </textPath>
+
+                        </text>
+                    </svg>
+
+                    <script>
+                        (function(){
+                            var ctrl = document.getElementById('ctrl');
+                            var text = textPathEg.querySelector('text');
+                            var textPath = text.firstElementChild;
+
+                            function update(target){
+                                var attr = target.getAttribute('ctrl');
+                                if(!attr) return;
+                                if(attr == 'startOffset'){
+                                    textPath.setAttribute(attr, target.value + '%');
+                                }else{
+                                    text.setAttribute(attr, target.value);
+                                }
+                            }
+
+                            ctrl.addEventListener('input', function(e){
+                                update(e.target);
+                            });
+
+                            ctrl.addEventListener('reset', function(e){
+                                setTimeout(function(){
+                                   var list = document.querySelectorAll('#ctrl *[ctrl]');
+                                    [].slice.call(list).forEach(update);
+                                });
+                            });
+
+
+
+                        })()
+
+
+                    </script>
+
+                </dd>
+
+
+            </dl>
+        </div>
+
+        <!--dy-->
+        <div class="des bg-light level-1">
+            <dl>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+                        <pre data-lang="HTML" class="close">
+                            <xmp>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="640" height="400"
+         viewBox="-0.5 -0.5 640 400"
+         style="background: #fff" >
+        <path id="path1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+        <text style="font-size: 24px;" text-anchor="middle">
+            <textPath xlink:href="#path1" startOffset="50%">
+                <tspan>这个文字先</tspan>
+                <tspan dy="-30" fill="red">上去</tspan>
+                <tspan dy="30">又</tspan>
+                <tspan dy="30" fill="green">下来</tspan>
+                <tspan dy="-30">了</tspan>
+            </textPath>
+
+        </text>
+    </svg>
+                            </xmp>
+                        </pre>
+                    </div>
+                </dd>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="400"
+                         viewBox="-0.5 -0.5 640 400"
+                         style="background: #fff" >
+                        <path id="path1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+                        <text style="font-size: 24px;" text-anchor="middle">
+                            <textPath xlink:href="#path1" startOffset="50%">
+                                <tspan>这个文字先</tspan>
+                                <tspan dy="-30" fill="red">上去</tspan>
+                                <tspan dy="30">又</tspan>
+                                <tspan dy="30" fill="green">下来</tspan>
+                                <tspan dy="-30">了</tspan>
+                            </textPath>
+
+                        </text>
+                    </svg>
+                </dd>
+
+
+            </dl>
+        </div>
+
+
+        <!--使用脚本控制路径文本-->
+        <ul class="des bg-light level-1">
+            <li>setAttributeNS() 方法设置 xlink:href 属性</li>
+            <li>把文本节点替换为 <xmp style="display: inline;"> <textpath> </xmp> 节点</li>
+        </ul>
+
+        <div class="des bg-light level-1">
+            <dl>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+                        <pre data-lang="HTML" class="close">
+                            <xmp>
+                                <form>
+                                    <label>Path:</label>
+                                    <select id="text-path-select">
+                                        <option value="none">none</option>
+                                        <option value="#ctrlpath1">path1</option>
+                                        <option value="#ctrlpath2">path2</option>
+                                        <option value="#ctrlpath3">path3</option>
+                                    </select>
+                                </form>
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="800" height="600"
+                                     viewBox="-0.5 -0.5 800 600"
+                                     style="background: #fff" >
+                                    <path id="ctrlpath1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+
+                                    <path id="ctrlpath2" d="M 100,300l100-50,200,100,100,-50" stroke="rgb(255, 0, 0)" fill="none"></path>
+
+                                    <path id="ctrlpath3" d="M 100 ,400 A 400, 300, 0,0,0,500,400" stroke="rgb(0,0, 255)" fill="none"></path>
+
+
+
+                                    <text id="changedtext" style="font-size: 24px;"  x="100" y="100">
+                                        Text path scripting. <tspan id="tspan">动态使用路径文本</tspan>
+
+                                    </text>
+                                </svg>
+
+                                <script>
+
+                                    (function(){
+                                        var  SVG_NS = 'http://www.w3.org/2000/svg';
+                                        var  XLINK_NS = 'http://www.w3.org/1999/xlink';
+
+                                        var select = document.getElementById('text-path-select');
+                                        var text = document.getElementById('changedtext');
+                                        var tspan =  document.getElementById('tspan');
+
+                                        select.addEventListener('input', function(){
+                                            var value = select.value;
+                                            if(text.firstChild.tagName && text.firstChild.tagName.toLowerCase() == 'textpath'){
+                                                removeTextPath();
+                                                if(value != 'none'){
+                                                    addTextPath();
+                                                    setTextPath(value);
+                                                }
+                                            }else{
+                                                if(value != 'none') {
+                                                    addTextPath();
+                                                    setTextPath(value);
+                                                }
+                                            }
+
+                                        });
+
+                                        var addTextPath = function(){
+                                            var textPath = document.createElementNS(SVG_NS, 'textPath');
+                                            while (text.firstChild){
+                                                textPath.appendChild(text.firstChild);
+                                            }
+                                            text.appendChild(textPath);
+
+                                        };
+                                        var setTextPath = function(path){
+
+                                            var textPath = text.firstChild;
+                                            textPath.setAttributeNS(XLINK_NS, 'xlink:href', path)
+
+                                            var pathElement = document.querySelector(path);
+
+                                            tspan.setAttribute('fill', pathElement.getAttribute('stroke'))
+
+                                        };
+
+                                        var removeTextPath = function(){
+                                            var textPath = text.firstChild;
+
+                                            while (textPath.firstChild){
+                                                text.appendChild(textPath.firstChild);
+                                            }
+
+                                            text.removeChild(textPath);
+
+                                            tspan.removeAttribute('fill');
+
+                                        };
+
+                                    })();
+
+
+
+
+                                </script>
+                            </xmp>
+                        </pre>
+                    </div>
+                </dd>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+
+                    <form>
+                        <label>Path:</label>
+                        <select id="text-path-select">
+                            <option value="none">none</option>
+                            <option value="#ctrlpath1">path1</option>
+                            <option value="#ctrlpath2">path2</option>
+                            <option value="#ctrlpath3">path3</option>
+                        </select>
+                    </form>
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="800" height="600"
+                         viewBox="-0.5 -0.5 800 600"
+                         style="background: #fff" >
+                        <path id="ctrlpath1" d="M 100 200 Q 200 100 300 200 T 500 200" stroke="rgb(0, 255, 0)" fill="none"></path>
+
+                        <path id="ctrlpath2" d="M 100,300l100-50,200,100,100,-50" stroke="rgb(255, 0, 0)" fill="none"></path>
+
+                        <path id="ctrlpath3" d="M 100 ,400 A 400, 300, 0,0,0,500,400" stroke="rgb(0,0, 255)" fill="none"></path>
+
+
+
+                        <text id="changedtext" style="font-size: 24px;"  x="100" y="100">
+                            Text path scripting. <tspan id="tspan">动态使用路径文本</tspan>
+
+                        </text>
+                    </svg>
+
+                    <script>
+
+                        (function(){
+                            var  SVG_NS = 'http://www.w3.org/2000/svg';
+                            var  XLINK_NS = 'http://www.w3.org/1999/xlink';
+
+                            var select = document.getElementById('text-path-select');
+                            var text = document.getElementById('changedtext');
+                            var tspan =  document.getElementById('tspan');
+
+                            select.addEventListener('input', function(){
+                                var value = select.value;
+                                if(text.firstChild.tagName && text.firstChild.tagName.toLowerCase() == 'textpath'){
+                                    removeTextPath();
+                                    if(value != 'none'){
+                                        addTextPath();
+                                        setTextPath(value);
+                                    }
+                                }else{
+                                    if(value != 'none') {
+                                        addTextPath();
+                                        setTextPath(value);
+                                    }
+                                }
+
+                            });
+
+                            var addTextPath = function(){
+                                var textPath = document.createElementNS(SVG_NS, 'textPath');
+                                while (text.firstChild){
+                                    textPath.appendChild(text.firstChild);
+                                }
+                                text.appendChild(textPath);
+
+                            };
+                            var setTextPath = function(path){
+
+                                var textPath = text.firstChild;
+                                textPath.setAttributeNS(XLINK_NS, 'xlink:href', path)
+
+                                var pathElement = document.querySelector(path);
+
+                                tspan.setAttribute('fill', pathElement.getAttribute('stroke'))
+
+                            };
+
+                            var removeTextPath = function(){
+                                var textPath = text.firstChild;
+
+                                while (textPath.firstChild){
+                                    text.appendChild(textPath.firstChild);
+                                }
+
+                                text.removeChild(textPath);
+
+                                tspan.removeAttribute('fill');
+
+                            };
+
+                        })();
+
+
+
+
+                    </script>
+
+
+                </dd>
+
+
+            </dl>
+        </div>
+
+    </section>
+
+
+
+    <section>
+        <h4 class="title-level-1">5-4 、<xmp style="display: inline"><a></xmp>插入超链接</h4>
+
+
+        <div class="des bg-light level-1">
+            <ul>
+                <li>可以添加到任意的图形上</li>
+                <li>xlink:href 指定连接地址</li>
+                <li>xlink:title 指定连接提示</li>
+                <li>target 指定打开目标</li>
+            </ul>
+        </div>
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+                        <pre data-lang="HTML" class="close">
+                            <xmp>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="640" height="300"
+             viewBox="-0.5 -0.5 640 300"
+             style="background: #fff">
+            <a
+                    xlink:href="http://www.baidu.com"
+                    xlink:title="圆形"
+                    target="_blank">
+                <circle
+                        cx="300"
+                        cy="150"
+                        r="50"
+                        fill="rgba(0,255,0,0.5)"
+                        stroke="rgb(0,200,0)"
+                        stroke-width="2"></circle>
+            </a>
+        </svg>
+                            </xmp>
+                        </pre>
+                    </div>
+                </dd>
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff">
+                        <a
+                            xlink:href="http://www.baidu.com"
+                            xlink:title="圆形"
+                            target="_blank">
+                            <circle
+                                    cx="300"
+                                    cy="150"
+                                    r="50"
+                                    fill="rgba(0,255,0,0.5)"
+                                    stroke="rgb(0,200,0)"
+                                    stroke-width="2"></circle>
+                        </a>
+                    </svg>
+                </dd>
+            </dl>
+        </div>
+
+    </section>
+
+
+</div>
+
+</body>
+
+<script>
+    window.onload = function(){
+        var body = document.getElementsByTagName('body')[0];
+        body.onclick = function(e){
+            var element = e.target;
+//            console.log(element.tagName.toLowerCase());
+            if(element.tagName.toLowerCase() == 'pre' && element.dataset.lang){
+
+//                   'close'
+//                console.log(element.className.indexOf('close'))
+
+
+                if(element.className.indexOf('close') != -1){
+                    element.className = element.className.replace(/close/,"");
+                }else{
+                    element.className += ' close';
+                };
+
+
+
+            }
+        }
+    };
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

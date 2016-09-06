@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五角星</title>
+</head>
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto">
+    当前浏览器不支持canvas
+</canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        var R = 100,
+            r = 50;
+        var start = [400, 400];
+
+
+        drawStar(context, r, R, 300, 300, 30);
+        drawNormalStar(context, R, 500, 500, 12);
+
+
+
+
+    }
+
+    function drawStar(cxt, r, R, x, y, rotate){
+        cxt.beginPath();
+        for(i = 0; i < 5; i++){
+            cxt.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + x, -Math.sin( (18 + i*72  - rotate)/180 * Math.PI) * R + y );
+            cxt.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * r + x, -Math.sin( (54 + i*72  - rotate)/180 * Math.PI) * r + y );
+        }
+        cxt.closePath();
+        cxt.stroke();
+    }
+
+    function drawNormalStar(cxt, R, x, y, rotate){
+        cxt.beginPath();
+        var cr = Math.sin( (18 + i*72)/180 * Math.PI) * R / Math.sin(54/180 * Math.PI);
+        for(i = 0; i < 5; i++){
+            cxt.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + x, -Math.sin( (18 + i*72 - rotate)/180 * Math.PI) * R + y );
+            cxt.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * cr + x, -Math.sin( (54 + i*72 - rotate)/180 * Math.PI) * cr + y );
+        }
+        cxt.closePath();
+        cxt.stroke();
+    }
+
+
+</script>
+</html>

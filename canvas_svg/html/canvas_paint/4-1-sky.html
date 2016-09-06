@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星空</title>
+</head>
+<body>
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto">
+    当前浏览器不支持canvas
+</canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+
+
+
+
+        context.fillStyle = 'black';
+        context.fillRect(0,0, canvas.width, canvas.height);
+
+        for(var i = 0; i < 200; i ++){
+            var R = Math.random() * 10 + 10;
+            var r = R /(2.4- Math.random());
+
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height;
+            var rotate = Math.random() * 360;
+
+            drawStar(context, r, R, x, y, rotate);
+        }
+
+
+        drawNormalStar(context, R, 500, 500, 12);
+
+
+
+
+    }
+
+    function drawStar(cxt, r, R, x, y, rotate){
+        cxt.beginPath();
+        for(i = 0; i < 5; i++){
+            cxt.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + x, -Math.sin( (18 + i*72  - rotate)/180 * Math.PI) * R + y );
+            cxt.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * r + x, -Math.sin( (54 + i*72  - rotate)/180 * Math.PI) * r + y );
+        }
+        cxt.closePath();
+        cxt.fillStyle = '#fb3';
+        cxt.strokeStyle = '#fd5';
+        cxt.lineWidth = 3;
+        cxt.lineJoin = 'round';
+        cxt.fill();
+        cxt.stroke();
+    }
+
+    function drawNormalStar(cxt, R, x, y, rotate){
+        cxt.beginPath();
+        var cr = Math.sin( (18 + i*72)/180 * Math.PI) * R / Math.sin(54/180 * Math.PI);
+        for(i = 0; i < 5; i++){
+            cxt.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + x, -Math.sin( (18 + i*72 - rotate)/180 * Math.PI) * R + y );
+            cxt.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * cr + x, -Math.sin( (54 + i*72 - rotate)/180 * Math.PI) * cr + y );
+        }
+        cxt.closePath();
+//        cxt.stroke();
+    }
+
+
+</script>
+</html>

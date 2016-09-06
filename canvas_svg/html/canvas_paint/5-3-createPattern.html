@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐变</title>
+
+</head>
+<body>
+<div style=" min-height: 15px; background-color: hsla(36, 34%, 73%, 0.6);">
+    <h3>
+        createPattern(img, repeat-style)
+    </h3>
+
+    <pre>
+        <code>
+
+            createPattern(img, repeat-style);
+            img:
+                image
+                canvas
+            repeat-style:
+                no-repeat
+                repeat-x
+                repeat-y
+                repeat
+        </code>
+    </pre>
+
+</div>
+
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        var backgroundImage = new  Image();
+        backgroundImage.src = '../../img/sprite_cell1_1.png';
+        backgroundImage.onload = function(){
+            var pattern = context.createPattern(backgroundImage, 'no-repeat');
+            context.fillStyle = pattern;
+            context.fillRect(0,0, canvas.width, canvas.height);
+        };
+    }
+
+
+</script>
+</html>

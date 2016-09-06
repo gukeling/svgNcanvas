@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阴影</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);padding: 10px;">
+    <h3>
+        阴影
+    </h3>
+    <p>context.shadowColor</p>
+    <p>context.shadowOffsetX</p>
+    <p>context.shadowOffsetY</p>
+    <p>context.shadowBlur</p>
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+    <style>
+        .shadow-btn{
+            margin: 50px;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #049fbb;
+            border-radius: 5px;
+
+            box-shadow:
+                    1px 0 0 #555,
+                    0 1px 0 #333,
+                    2px 1px 0 #555,
+                    1px 2px 0 #333,
+                    3px 2px 0 #555,
+                    2px 3px 0 #333,
+                    4px 3px 0 #555,
+                    3px 4px 0 #333,
+                    5px 4px 0 #555,
+                    4px 5px 0 #333,
+                    5px 5px 1px rgba(0,0,0,0.3);
+        }
+    </style>
+
+    <div class="shadow-btn">box-shadow立体按钮</div>
+
+</div>
+<canvas id="canvas" style="border: 1px solid #f49912"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        context.fillStyle = '#058';
+
+        context.shadowColor = 'grey';
+        context.shadowOffsetX = 20;
+        context.shadowOffsetY = 20;
+        context.shadowBlur = 5;
+
+        context.fillRect(200, 200, 400, 400);
+
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

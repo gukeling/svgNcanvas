@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clearRect</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);">
+    <dl>
+        <dt>
+            <h3>context.clearRect()</h3>
+
+        </dt>
+        <dd>
+            <p>对指定区域矩形做清空操作</p>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>
+            <h3>context.isPointInPath(x, y)</h3>
+        </dt>
+        <dd>
+            <p>点击检测，判断一点是否在当前规划路径内</p>
+        </dd>
+    </dl>
+
+
+
+
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+
+</div>
+<canvas id="canvas" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+<canvas id="canvas1" style="border: 1px solid #aaa;margin: 50px auto"></canvas>
+
+</body>
+<script>
+
+
+    window.onload = function(){
+        initBalls();
+        circleClick();
+        circleHover();
+    }
+
+
+
+
+
+    var balls = [];
+    var canvasWidth = 800, canvasHeight = 800;
+
+    function initBalls(){
+
+        for(var i = 0; i < 10; i ++){
+            var aBall = {
+                x : Math.random() * canvasWidth,
+                y : Math.random() * canvasHeight,
+                r : Math.random() * 50 + 20
+            };
+            balls[i] = aBall;
+        }
+    }
+
+    //圆形点击变红
+    function circleClick(){
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        draw(context);
+        canvas.addEventListener('mouseup', function(e){
+            detect(e, context);
+        });
+        context.fill();
+    }
+    function draw(context){
+
+        for(var i = 0; i < balls.length; i ++){
+            context.beginPath();
+            context.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+            context.fillStyle = '#058';
+            context.closePath();
+            context.shadowColor = 'grey';
+            context.shadowOffsetX = 5;
+            context.shadowOffsetY = 5;
+            context.shadowBlur = 5;
+            context.fill();
+        }
+
+
+    }
+    function detect(event, context){
+        var canvas = context.canvas;
+//        获得鼠标点击在canvas中的位置 (getBoundingClientRect().left : 获取鼠标点击位置距离包围框左边的距离)
+        var x = event.clientX - canvas.getBoundingClientRect().left;
+        var y = event.clientY - canvas.getBoundingClientRect().top;
+
+        for(var i = 0; i < balls.length; i ++){
+            context.beginPath();
+            context.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+
+            if(context.isPointInPath(x, y)){
+                context.fillStyle = 'red';
+                context.fill();
+            }
+        }
+    }
+
+
+    //鼠标悬停变红
+    function circleHover(){
+        var canvas = document.getElementById('canvas1');
+        var context = canvas.getContext('2d');
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        drawNew(0, 0, context);
+        canvas.addEventListener('mousemove', function(e){
+            detectNew(e, context);
+        });
+        context.fill();
+    }
+    function detectNew(event, context){
+        var canvas = context.canvas;
+//        获得鼠标点击在canvas中的位置 (getBoundingClientRect().left : 获取鼠标点击位置距离包围框左边的距离)
+        var x = event.clientX - canvas.getBoundingClientRect().left;
+        var y = event.clientY - canvas.getBoundingClientRect().top;
+        drawNew(x, y, context);
+
+    }
+
+    function drawNew(x, y, context){
+        var canvas = context.canvas;
+        context.clearRect(0 , 0, canvas.width, canvas.height);
+        for(var i = 0; i < balls.length; i ++){
+            context.beginPath();
+            context.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+
+            if (context.isPointInPath(x, y)){
+                context.fillStyle = 'red';
+            }else{
+                context.fillStyle = '#058';
+            }
+
+            context.shadowColor = 'grey';
+            context.shadowOffsetX = 5;
+            context.shadowOffsetY = 5;
+            context.shadowBlur = 5;
+            context.fill();
+        }
+
+    }
+
+
+
+</script>
+</html>

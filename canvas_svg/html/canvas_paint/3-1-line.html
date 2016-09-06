@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);">
+    <h3>
+        lineCap(线条的边缘)
+    </h3>
+    <p>butt(default)</p>
+    <p>round--圆的</p>
+    <p>square--方的</p>
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+    <h3>
+        lineJoin(线条的交点)
+    </h3>
+    <p>miter(default)形成角</p>
+    <p>miterLimit (default value=10)内角和外角长度最大值，超出则用bevel显示</p>
+    <p>bevel斜接</p>
+    <p>round圆角</p>
+
+    <pre><xmp></xmp></pre>
+    <pre><code></code></pre>
+
+</div>
+<canvas id="canvas" style="border: 1px solid #f49912"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 500;
+
+        var context = canvas.getContext('2d');
+
+        context.lineWidth = 20;
+        context.strokeStyle = '#058';
+
+        context.beginPath();
+        context.moveTo(100, 200);
+        context.lineTo(700, 200);
+        context.lineCap = 'butt';
+        context.stroke();
+        context.closePath();
+
+        context.beginPath();
+        context.moveTo(100, 300);
+        context.lineTo(700, 300);
+        context.lineCap = 'round';
+        context.stroke();
+        context.closePath();
+
+        context.beginPath();
+        context.moveTo(100, 400);
+        context.lineTo(700, 400);
+        context.lineCap = 'square';
+        context.stroke();
+        context.closePath();
+
+        context.beginPath();
+        context.moveTo(100, 150);
+        context.lineTo(100, 450);
+        context.moveTo(700, 150);
+        context.lineTo(700, 450);
+        context.lineWidth = 1;
+        context.strokeStyle = '#058';
+        context.stroke();
+        context.closePath();
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

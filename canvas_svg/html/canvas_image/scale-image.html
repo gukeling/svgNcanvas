@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图像处理</title>
+</head>
+<body style="background: #000;">
+<canvas id="canvas" style="display: block;margin: 10px auto;border: 1px solid #f49912"></canvas>
+
+<input id="scale-range" type="range" min="0.5" max="3.0" step="0.01" value="1.0" style="display: block; margin: 20px auto; width: 800px;">
+
+<canvas id="watermark-canvas" style="display: none;margin: 0 auto; border: 1px solid #aaa;"></canvas>
+
+</body>
+<script>
+
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var slider = document.getElementById('scale-range');
+    var img = new Image();
+
+    var watermarkCanvas = document.getElementById('watermark-canvas');
+    var watermarkContext = watermarkCanvas.getContext('2d');
+
+    window.onload = function(){
+        slider.value = 1.0;
+        var scale = slider.value;
+        canvas.width = 1400;
+        canvas.height = 1259;
+
+        img.src = '../../img/IMG_0035_fix.jpg';
+        img.onload = function () {
+            drawImageByScale(scale);
+            slider.onmousemove = function(){
+                scale = slider.value;
+                drawImageByScale(scale);
+            }
+        };
+        //绘制水印
+
+        watermarkCanvas.width = 600;
+        watermarkCanvas.height = 100;
+
+        watermarkContext.font = 'bold italic 50px Times New Roman';
+        watermarkContext.strokeStyle = '#fff';
+        watermarkContext.lineWidth = 1;
+        watermarkContext.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        watermarkContext.textBaseline = 'middle';
+        watermarkContext.textAlign = 'center';
+        watermarkContext.fillText('kimura takuya', 300, 50);
+        watermarkContext.strokeText('kimura takuya', 300, 50);
+
+
+    }
+
+    function drawImageByScale(scale){
+        var imageWidth = 1400 * scale;
+        var imageHeight = 1259 * scale;
+        var dx = (canvas.width - imageWidth ) / 2;
+        var dy = (canvas.height - imageHeight) / 2;
+
+        context.clearRect(0,0, canvas.width, canvas.height);
+        context.drawImage(img, dx, dy, imageWidth, imageHeight);
+        context.drawImage(watermarkCanvas,
+                canvas.width - watermarkCanvas.width,
+                canvas.height - watermarkCanvas.height,
+                watermarkCanvas.width,
+                watermarkCanvas.height);
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

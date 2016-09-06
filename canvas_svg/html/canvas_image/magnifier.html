@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+</head>
+<body style="background: #000;">
+<canvas id="canvas" style="display: block;margin: 10px auto;border: 1px solid #f49912"></canvas>
+
+<canvas id="offCanvas" style="display: none;margin: 0 auto; border: 1px solid #aaa;"></canvas>
+
+</body>
+<script>
+
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    var offCanvas = document.getElementById('offCanvas');
+    var offContext = offCanvas.getContext('2d');
+
+    var img = new Image();
+    var imgLarge = new Image();
+    var isMouseDown = false;
+    var scale ;
+
+    window.onload = function(){
+        canvas.width = 1400;
+        canvas.height = 1259;
+
+        img.src = '../../img/IMG_0035_fix.jpg';
+        imgLarge.src = '../../img/IMG_0035_large.jpg';
+        img.onload = function () {
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            context.drawImage(img, 0, 0);
+            imgLarge.onload = function () {
+                offCanvas.width = imgLarge.width;
+                offCanvas.height = imgLarge.height;
+                scale = imgLarge.width / img.width;
+                offContext.drawImage(imgLarge, 0, 0);
+            };
+
+
+
+
+
+        };
+
+    };
+
+    canvas.onmousedown = function(e){
+        e.preventDefault();
+        var point = windowToCanvas(e.clientX, e.clientY);
+        isMouseDown = true;
+        drawCanvasWithMagnifier(true, point);
+
+    };
+
+
+    canvas.onmousemove = function(e){
+        e.preventDefault();
+        if(isMouseDown){
+            var point = windowToCanvas(e.clientX, e.clientY);
+
+            drawCanvasWithMagnifier(true, point);
+        }
+    };
+
+    canvas.onmouseup = function(e){
+        e.preventDefault();
+
+        isMouseDown = false;
+        drawCanvasWithMagnifier(false);
+    };
+
+    canvas.onmouseout = function(e){
+        e.preventDefault();
+
+        if(!isMouseDown){
+            return;
+        }
+        isMouseDown = false;
+        drawCanvasWithMagnifier(false);
+    };
+
+    function drawCanvasWithMagnifier(isShowMagnifier, point){
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+
+        if(isShowMagnifier == true){
+            drawMagnifier(point);
+        }
+
+    }
+
+
+    function  drawMagnifier(point){
+
+        var imgLG_cx = point.x * scale;
+        var imgLG_cy = point.y * scale;
+
+        var mr = 200;
+
+        var sx = imgLG_cx - mr;
+        var sy = imgLG_cy - mr;
+
+
+        var dx = point.x - mr;
+        var dy = point.y - mr;
+
+
+        context.save();
+        context.lineWidth = 10;
+        context.strokeStyle = '#069';
+        context.beginPath();
+        context.arc(point.x, point.y, mr, 0, Math.PI * 2);
+        context.stroke();
+        context.clip();
+        context.drawImage(offCanvas,
+                sx, sy, mr * 2, mr * 2,
+                dx, dy, mr * 2, mr * 2
+        );
+        context.restore();
+    }
+
+    function windowToCanvas(x, y){
+        //getBoundingClientRect : 获得canvas距离包围元素的左边距和上边距
+        var bbox = canvas.getBoundingClientRect();
+        return {
+            x : x - bbox.left,
+            y : y - bbox.top
+        }
+    }
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

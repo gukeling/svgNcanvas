@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图形算法</title>
+</head>
+<body style="background: #000;">
+<div style="overflow: hidden">
+    <canvas id="canvasa" style="float: left;margin: 30px;border: 1px solid #f49912"></canvas>
+    <canvas id="canvasb" style="background-color: #fff;float: right;margin: 30px;border: 1px solid #f49912"></canvas>
+</div>
+<div style="text-align: center;margin-top: 50px; font-size: 20px;">
+    <a href="javascript:filter()"> filter</a>
+
+</div>
+
+</body>
+<script>
+
+    var canvasa = document.getElementById('canvasa');
+    var contexta = canvasa.getContext('2d');
+
+    var canvasb = document.getElementById('canvasb');
+    var contextb = canvasb.getContext('2d');
+
+    var img = new Image();
+
+    window.onload = function(){
+        img.src = '../../img/IMG_0035_small.jpg';
+
+        img.onload = function () {
+
+            canvasa.width = img.width;
+            canvasa.height = img.height;
+
+            canvasb.width = img.width;
+            canvasb.height = img.height;
+
+            contexta.drawImage(img, 0, 0);
+
+
+        };
+
+    };
+
+    function filter(){
+        var imageData = contexta.getImageData(0, 0, canvasa.width, canvasa.height);
+        var pixelData = imageData.data;
+
+
+        for(var i = 0; i < canvasb.width * canvasb.height; i++){
+            pixelData[ 4 * i + 0] = 0;
+//            pixelData[ 4 * i + 1] = 125;
+//            pixelData[ 4 * i + 2] = 255;
+//            pixelData[ 4 * i + 3] = 0.9;
+        }
+        contextb.putImageData(imageData, 0, 0, 0, 0, canvasb.width , canvasb.height);
+    }
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>svg</title>
+    <link rel="stylesheet" href="../../css/note.css"/>
+</head>
+<style>
+    #bg{
+        width: 400px;
+        height: 400px;
+        background: #fff url("../../img/example1.svg") repeat;
+        box-shadow: rgba(0,0,0,0.5) 2px 3px 10px ;
+        border-radius: 10px;
+    }
+
+</style>
+<body>
+
+<div class="pg-wrapper">
+    <h3>
+        svg简介
+    </h3>
+
+    <p>
+        w3c标准
+        <a href="http://www.w3.org/TR/SVG11" target="_blank">http://www.w3.org/TR/SVG11</a>
+    </p>
+
+    <p>
+        浏览器支持情况
+        <a href="http://caniuse.com/#cats=SVG" target="_blank">http://caniuse.com/#cats=SVG</a>
+    </p>
+
+    <h3 class="sub-title"> 1-1 、 svg使用方式</h3>
+    <ul class="des">
+        <li>浏览器打开</li>
+        <li>在html中使用<xmp style="display: inline;"><img></xmp>标签</li>
+        <li>在html中使用svg标签</li>
+        <li>作为css背景图</li>
+    </ul>
+
+
+    <div class="eg-wrapper">
+        <pre data-lang="HTML">
+            <xmp>
+                <img src="../../img/example1.svg">
+            </xmp>
+        </pre>
+
+
+        <p>原始大小</p>
+        <img src="../../img/example1.svg">
+
+        <p>50 x 50</p>
+        <img src="../../img/example1.svg" width="50" height="50">
+
+        <p>400 x 400</p>
+        <img src="../../img/example1.svg" width="400" height="400">
+    </div>
+
+    <div  class="eg-wrapper">
+        <pre data-lang="HTML">
+            <xmp>
+                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+                    <!--face-->
+                    <circle cx="100" cy="100" r="90" fill="#39f"/>
+                    <!--eyes-->
+                    <circle cx="70" cy="80" r="20" fill="#fff"/>
+                    <circle cx="130" cy="80" r="20" fill="#fff"/>
+                    <circle cx="65" cy="75" r="10" fill="#000"/>
+                    <circle cx="125" cy="75" r="10" fill="#000"/>
+                    <!--smile-->
+                    <path d="M 50 140 A 60 60 0 0 0 150 140" stroke="#fff" stroke-width="3" fill="none"/>
+                </svg>
+            </xmp>
+        </pre>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <!--face-->
+            <circle cx="100" cy="100" r="90" fill="#39f"/>
+            <!--eyes-->
+            <circle cx="70" cy="80" r="20" fill="#fff"/>
+            <circle cx="130" cy="80" r="20" fill="#fff"/>
+            <circle cx="65" cy="75" r="10" fill="#000"/>
+            <circle cx="125" cy="75" r="10" fill="#000"/>
+            <!--smile-->
+            <path d="M 50 140 A 60 60 0 0 0 150 140" stroke="#fff" stroke-width="3" fill="none"/>
+        </svg>
+    </div>
+
+    <div class="eg-wrapper">
+
+        <pre data-lang="HTML">
+            <xmp>
+                <style>
+                    #bg{
+                        width: 400px;
+                        height: 400px;
+                        background: #fff url("../../img/example1.svg") repeat;
+                        box-shadow: rgba(0,0,0,0.5) 2px 3px 10px ;
+                        border-radius: 10px;
+                    }
+                </style>
+                <div id="bg"></div>
+            </xmp>
+        </pre>
+
+        <div id="bg"></div>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

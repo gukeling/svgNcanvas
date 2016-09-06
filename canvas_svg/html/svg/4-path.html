@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>path</title>
+    <link rel="stylesheet" href="../../css/note.css"/>
+</head>
+<style></style>
+<body>
+
+<div class="pg-wrapper">
+
+
+    <h3 class="sub-title">四 、  path</h3>
+
+    <section>
+        <h4 class="title-level-1">4-1 、path概述</h4>
+
+        <div class="des bg-light level-1">
+
+            <p class="level-1"> 规范：<a href="http://www.w3.org/TR/SVG11/paths.html" target="_blank">http://www.w3.org/TR/SVG11/paths.html</a></p>
+
+            <dl>
+                <div style="background: #fff;" class="eg-wrapper">
+                <pre data-lang="eg">
+<xmp>
+    ‣ <path d="M0,0L10,20C30-10,40,20,100,100" stroke="red">
+    ‣ tiger.svg
+</xmp>
+                </pre>
+                </div>
+            </dl>
+
+        </div>
+
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>Path 概述 - Path 字符串</dt>
+
+                <dd style="margin-top: 50px; margin-bottom: 30px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="800" height="400"
+                         viewBox="-0.5 -0.5 800 400"
+                         style="background: #fff">
+
+                        <g stroke-width="2" stroke="#049FBB" fill="none">
+                            <text x="30" y="40" stroke-width="0" fill="#555"> ‣  &lt;path d="M0,0L10,20C30-10,40,20,100,100" stroke="red" &gt; </text>
+
+                            <rect  height="30" width="50" fill="none"  y="20" x="151"/>
+
+                            <rect x="100" y="150" width="500" height="200"   ></rect>
+
+                            <line x1="151" y1="50" x2="100" y2="150" stroke-dasharray="5,5"></line>
+
+                            <line x1="201" y1="50" x2="600" y2="150" stroke-dasharray="5,5"></line>
+
+
+                        </g>
+
+                        <g  stroke="none" fill="red">
+                            <text x="200" y="224" font-size="60">L</text>
+                            <text x="180" y="270" font-size="30">命令</text>
+
+                        </g>
+                        <g stroke="none" fill="#049FBB">
+                            <text x="263" y="224" font-size="60">10,20</text>
+                            <text x="270" y="270" font-size="30">参数</text>
+                        </g>
+
+
+                        <g stroke="#7BDB45" fill="none">
+                            <rect x="327" y="212" width="21" height="24"></rect>
+
+                            <rect height="100" width="200" y="240" x="390"></rect>
+
+                            <line stroke-dasharray="5,5" y2="240" x2="390" y1="236" x1="348"></line>
+
+                            <text stroke="none" y="230" x="406" fill="#308B16">
+
+                                <tspan dx="0" dy="36">参数之间可以⽤用空格</tspan>
+                                <tspan dx="-165" dy="20">或逗号隔开，有⼀一种</tspan>
+                                <tspan dx="-165" dy="20">情况例外，就是下⼀一</tspan>
+                                <tspan dx="-165" dy="20">个数值是负数。</tspan>
+
+
+                            </text>
+
+
+                        </g>
+
+                        <desc>This example uses the 'switch' element to provide a
+                            fallback graphical representation of a paragraph, if
+                            XHTML is not supported.</desc>
+
+                        <switch>
+                            <foreignObject width="150" height="300" x="621" y="33"
+                                           requiredExtensions="http://www.w3.org/1999/xhtml">
+                                        <span xmlns="http://www.w3.org/1999/xhtml" style="width: 140px;display: inline-block; font-size: 14px;line-height: 1.5em">
+                                            文字换行什么的， 使用foreignObject标签可以在svg中插入html代码，结合switch标签使用，具体怎么用我也不知道,似乎火狐浏览器好用，谷歌不支持，详情见 ： <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject">https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject</a>
+                                        </span>
+                            </foreignObject>
+                        </switch>
+                    </svg>
+
+
+                </dd>
+
+            </dl>
+        </div>
+
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>命令汇总</dt>
+                <dd>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th>命令</th>
+                                <th>含义</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>M/m (x,y)+</td>
+                                <td>移动当前位置</td>
+                            </tr>
+
+                            <tr>
+                                <td>L/l (x,y)+ </td>
+                                <td>从当前位置绘制线段到指定位置</td>
+                            </tr>
+
+                            <tr>
+                                <td>H/h (x)+</td>
+                                <td>从当前位置绘制⽔水平线到达指定的 x 坐标</td>
+                            </tr>
+                            <tr>
+                                <td>V/v (x)+ </td>
+                                <td>从当前位置绘制竖直线到达指定的 y 坐标</td>
+                            </tr>
+
+                            <tr>
+                                <td>Z/z</td>
+                                <td>闭合当前路径</td>
+                            </tr>
+                            <tr>
+                                <td>C/c (x1,y1,x2,y2,x,y)+</td>
+                                <td>从当前位置绘制三次⻉贝塞尔曲线到指定位置</td>
+                            </tr>
+                            <tr>
+                                <td>S/s (x2,y2,x,y)+</td>
+                                <td>从当前位置光滑绘制三次⻉贝塞尔曲线到指定位置</td>
+                            </tr>
+                            <tr>
+                                <td>Q/q (x1,y1,x,y)+</td>
+                                <td>从当前位置绘制⼆二次⻉贝塞尔曲线到指定位置</td>
+                            </tr>
+                            <tr>
+                                <td>T/t (x,y)+</td>
+                                <td>从当前位置光滑绘制⼆二次⻉贝塞尔曲线到指定位置</td>
+                            </tr>
+                            <tr>
+                                <td>A/a (rx,ry,xr,laf,sf,x,y)</td>
+                                <td>从当前位置绘制弧线到指定位置</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </dd>
+            </dl>
+        </div>
+
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>命令基本规律</dt>
+                <dd>• 区分大小写：大写表示坐标参数为绝对位置，小写则为相对位置</dd>
+                <dd>• 最后的参数表示最终要到达的位置</dd>
+                <dd>• 上一个命令结束的位置就是下一个命令开始的位置</dd>
+                <dd>• 命令可以重复参数表示重复执行同一条命令</dd>
+            </dl>
+        </div>
+
+
+
+    </section>
+
+    <section>
+        <h4 class="title-level-1">4-2 、移动和直线命令</h4>
+
+        <ul class="des bg-light level-1">
+            <li>M (x, y)+ 移动画笔，后面如果有重复参数，会当做是 L 命令处理</li>
+            <li>L (x, y)+ 绘制直线到指定位置</li>
+            <li>H (x)+ 绘制水平线到指定的 x 位置</li>
+            <li>V (y)+ 绘制竖直线到指定的 y 位置</li>
+            <li>m、l、h、v 使用相对位置绘制</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h4 class="title-level-1">4-3 、弧线命令</h4>
+        <ul class="des bg-light level-1">
+            <li>A (rx, ry, xr, laf, sf, x, y) - 绘制弧线</li>
+            <li>
+                最复杂的命令
+                <ul class="bg-light level-1">
+                    <li>rx - （radius-x）弧线所在椭圆的 x 半轴长</li>
+                    <li>ry - （radius-y）弧线所在椭圆的 y 半轴长</li>
+                    <li>xr - （xAxis-rotation）弧线所在椭圆的长轴角度</li>
+                    <li>laf - （large-arc-flag）是否选择弧长较长的那一段弧——长弧1短弧0</li>
+                    <li>sf - （sweep-flag）是否选择逆时针方向的那一段弧——顺时针1逆时针0</li>
+                    <li>x, y - 弧的终点位置</li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <div class="des bg-light level-1">
+            <dl>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff" >
+                        <defs>
+                            <g id="eg1">
+                                <ellipse  rx="80" ry="40"  cx="0" cy="0"></ellipse>
+                                <ellipse  rx="80" ry="40"  cx="-85" cy="55"></ellipse>
+                                <g fill="#30A2F4" stroke="none">
+                                    <circle cy="16" cx="-72" r="4" ></circle>
+                                    <circle  cy="40" cx="-11" r="4" ></circle>
+                                </g>
+                            </g>
+                        </defs>
+
+                        <g transform="translate(205, 56) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 0, 1, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(507, 56) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 0, 0, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(205, 201) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 1, 1, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(507, 201) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 1, 0, -11, 40 "></path>
+                        </g>
+
+
+                    </svg>
+                </dd>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML">
+                <xmp>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff" >
+                        <defs>
+                            <g id="eg1">
+                                <ellipse  rx="80" ry="40"  cx="0" cy="0"></ellipse>
+                                <ellipse  rx="80" ry="40"  cx="-85" cy="55"></ellipse>
+                                <g fill="#30A2F4" stroke="none">
+                                    <circle cy="16" cx="-72" r="4" ></circle>
+                                    <circle  cy="40" cx="-11" r="4" ></circle>
+                                </g>
+                            </g>
+                        </defs>
+
+                        <g transform="translate(205, 56) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 0, 1, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(507, 56) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 0, 0, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(205, 201) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 1, 1, -11, 40 "></path>
+                        </g>
+
+                        <g transform="translate(507, 201) rotate(12)">
+                            <use xlink:href="#eg1"  fill="none" stroke="#777" ></use>
+                            <path stroke-width="2" fill="none" stroke="red" d="M -74 16 A 80, 40, 0, 1, 0, -11, 40 "></path>
+                        </g>
+
+
+                    </svg>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </section>
+
+
+    <section>
+        <h4 class="title-level-1">4-4 、贝塞尔曲线命令</h4>
+
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>二次贝塞尔曲线命令</dt>
+                <dd>
+                    <ul>
+                        <li>起始点</li>
+                        <li>结束点</li>
+                        <li>控制点</li>
+                        <li>控制线</li>
+                    </ul>
+                </dd>
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff">
+                        <g>
+                            <polyline points="100 260 260 50 420 260" fill="none" stroke="#049FBB" stroke-width="2"></polyline>
+                            <circle cx="100" cy="260" r="5" fill="#333"></circle>
+
+                            <circle cx="420" cy="260" r="5" fill="#333"></circle>
+
+                            <circle cx="260" cy="50" r="5" fill="#999"></circle>
+                            <text x="120" y="260">P0(x0, y0)</text>
+                            <text x="440" y="260">P(x, y)</text>
+                            <text x="280" y="50">C1(x1, y1)</text>
+
+                            <path d="M 100 260 Q 260 50 420 260" fill="none" stroke="red" stroke-width="2"></path>
+                        </g>
+                    </svg>
+                </dd>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML">
+                <xmp>
+                    <path d="M x0 y0 Q x1 y1 x y" fill="none" stroke="red" stroke-width="2"></path>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="des bg-light level-1">
+            <dl>
+                <dt>三次贝塞尔曲线命令</dt>
+                <dd>
+                    <ul>
+                        <li>起始点</li>
+                        <li>结束点</li>
+                        <li>控制点</li>
+                        <li>控制线</li>
+                    </ul>
+                </dd>
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="300"
+                         viewBox="-0.5 -0.5 640 300"
+                         style="background: #fff">
+                        <g>
+
+                            <polyline points="100 260 100 50" fill="none" stroke="#049FBB" stroke-width="2"></polyline>
+
+                            <polyline points="450 260 450 50" fill="none" stroke="#049FBB" stroke-width="2"></polyline>
+
+                            <circle cx="100" cy="260" r="5" fill="#333"></circle>
+
+                            <circle cx="450" cy="260" r="5" fill="#333"></circle>
+
+                            <circle cx="100" cy="50" r="5" fill="#999"></circle>
+
+                            <circle cx="450" cy="50" r="5" fill="#999"></circle>
+                            <text x="120" y="260">P0(x0, y0)</text>
+                            <text x="470" y="260">P(x, y)</text>
+                            <text x="120" y="50">C1(x1, y1)</text>
+                            <text x="470" y="50">C2(x2, y2)</text>
+
+                            <path d="M 100 260 C 100 50 450 50 450 260" fill="none" stroke="red" stroke-width="2"></path>
+                        </g>
+                    </svg>
+                </dd>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML">
+                <xmp>
+                    <path d="M x0 y0 C x1 y1 x2 y2 x y" fill="none" stroke="red" stroke-width="2"></path>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="des bg-light level-1">
+            <p class="level-1">光滑曲线</p>
+
+            <dl>
+                <dt>• T: Q 的光滑版本</dt>
+                <dd>‣ C' 是上一段曲线的控制点关于当前曲线起始点的镜像位置</dd>
+                <dd>(命令中只需要写明结束点坐标就可以)</dd>
+            </dl>
+
+            <dl>
+                <dt>• S: C 的简化版本</dt>
+                <dd>‣ C2' 是上一段曲线的控制点2关于当前曲线起始点的镜像位置</dd>
+                <dd>(命令中只需要写明第二个控制点和结束点坐标就可以)</dd>
+            </dl>
+
+            <dl>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="640" height="360"
+                         viewBox="-0.5 -0.5 640 360"
+                         style="background: #fff">
+                        <g>
+                            <polyline points="150 30 150 160 350 160 350 290" fill="none" stroke-width="2" stroke="#999" stroke-dasharray="5 5"></polyline>
+                            <polyline points="50 160 150 30 250 160" fill="none" stroke="#049FBB" stroke-width="2"></polyline>
+                            <polyline points="250 160 350 290 450 160" fill="none" stroke="pink" stroke-dasharray="8 5"></polyline>
+                            <circle cx="50" cy="160" r="5" fill="#333"></circle>
+
+                            <circle cx="250" cy="160" r="5" fill="#333"></circle>
+
+                            <circle cx="150" cy="30" r="5" fill="#999"></circle>
+                            <text x="70" y="160">P0(x0, y0)</text>
+                            <text x="270" y="160">P(x, y)</text>
+                            <text x="170" y="50">C1(x1, y1)</text>
+
+
+                            <circle cx="450" cy="160" r="5" fill="#4BB429"></circle>
+
+                            <text x="470" y="160">P'(x', y')</text>
+
+                            <circle cx="350" cy="290" r="5" fill="none" stroke="purple"></circle>
+
+                            <text x="370" y="290">C'(xc', yc')</text>
+                            <text x="370" y="320">镜像控制点</text>
+
+                            <rect x="250" y="140" width="210" height="164" fill="none" stroke="green" stroke-dasharray="8 5"></rect>
+
+                            <text x="370" y="120" fill="green">T x' y'</text>
+
+                            <path d="M 50 160 Q 150 50 250 160 T 450 160" fill="none" stroke="red" stroke-width="2"></path>
+                        </g>
+                    </svg>
+                </dd>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML">
+                <xmp>
+                    <path d="M x0 y0 Q x1 y1 x y T x' y'" fill="none" stroke="red" stroke-width="2"></path>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+
+                <dd style="margin-top: 30px; margin-bottom: 50px">
+                    <svg style="background: #fff" viewBox="-0.5 -0.5 640 360" height="360" width="640" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+
+                            <polyline stroke-width="2" stroke="#049FBB" fill="none" points="100 180 100 50"></polyline>
+
+                            <polyline stroke-width="2" stroke="#049FBB" fill="none" points="300 180 300 50"></polyline>
+
+                            <circle fill="#333" r="5" cy="180" cx="100"></circle>
+
+                            <circle fill="#333" r="5" cy="180" cx="300"></circle>
+
+                            <circle fill="#999" r="5" cy="50" cx="100"></circle>
+
+                            <circle fill="purple" r="5" cy="50" cx="300"></circle>
+                            <text y="180" x="120">P0(x0, y0)</text>
+                            <text y="180" x="320">P(x, y)</text>
+                            <text y="50" x="120">C1(x1, y1)</text>
+                            <text y="50" x="320">C2(x2, y2)</text>
+
+                            <line x1="300" y1="180" x2="300" y2="310" stroke-dasharray="8 5" stroke="purple"></line>
+                            <circle fill="none" stroke="purple" r="5" cy="310" cx="300"></circle>
+                            <text y="310" x="310">C2':C2 关于P的镜像位置</text>
+
+                            <line x1="500" y1="180" x2="500" y2="310" stroke="#999" stroke-width="2"></line>
+                            <circle fill="#999" r="5" cy="310" cx="500"></circle>
+                            <circle fill="#999" r="5" cy="180" cx="500"></circle>
+
+
+                            <path stroke-width="2" stroke="red" fill="none" d="M 100 180 C 100 50 300 50 300 180 S 500 310 500 180"/>
+                        </g>
+                    </svg>
+                </dd>
+
+                <dd>
+                    <div class="eg-wrapper" style="background: #fff;">
+            <pre data-lang="HTML">
+                <xmp>
+                    <path stroke-width="2" stroke="red" fill="none" d="M 100 180 C 100 50 300 50 300 180 S 500 310 500 180"/>
+                </xmp>
+            </pre>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+    </section>
+
+
+    <section>
+        <h4 class="title-level-1">4-5 、思考题</h4>
+
+        <ul class="des bg-light level-1">
+            <li>* 如何求贝塞尔曲线的长度，如何求整个 Path 的长度？</li>
+            <li>* 如何求一个 Path 的子路径？</li>
+            <li>* 如何求两个 Path 的补间？</li>
+        </ul>
+
+    </section>
+
+</div>
+
+</body>
+<script>
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

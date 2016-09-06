@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩展context</title>
+</head>
+
+<body>
+
+<div style=" min-height: 15px; background-color: hsla(77,54%,86%,0.6);padding: 10px;">
+    <h3>
+        扩展context
+    </h3>
+
+
+</div>
+
+<canvas id="canvas" style="border: 1px solid crimson"></canvas>
+
+
+</body>
+<script>
+
+    CanvasRenderingContext2D.prototype.fillStar = function(r, R, x, y, rotate){
+
+        this.beginPath();
+        for(i = 0; i < 5; i++){
+            this.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + x, -Math.sin( (18 + i*72  - rotate)/180 * Math.PI) * R + y );
+            this.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * r + x, -Math.sin( (54 + i*72  - rotate)/180 * Math.PI) * r + y );
+        }
+        this.closePath();
+        this.fill();
+    };
+
+
+    var originalMoveTo = CanvasRenderingContext2D.prototype.moveTo;
+    CanvasRenderingContext2D.prototype.lastMoveToLoc = {};
+
+    CanvasRenderingContext2D.prototype.myMoveTo = function(x, y){
+        originalMoveTo.apply( this , [x,y]);
+        this.lastMoveToLoc.x = x;
+        this.lastMoveToLoc.y = y;
+    }
+
+    CanvasRenderingContext2D.prototype.drawStar = function(r, R, rotate){
+        this.beginPath();
+        for(i = 0; i < 5; i++){
+            this.lineTo(Math.cos( (18 + i*72 - rotate)/180 * Math.PI) * R + this.lastMoveToLoc.x, -Math.sin( (18 + i*72  - rotate)/180 * Math.PI) * R + this.lastMoveToLoc.y );
+            this.lineTo(Math.cos( (54 + i*72 - rotate)/180 * Math.PI) * r + this.lastMoveToLoc.x, -Math.sin( (54 + i*72  - rotate)/180 * Math.PI) * r + this.lastMoveToLoc.y );
+        }
+        this.closePath();
+        this.stroke();
+    }
+
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        var R = 100,
+                r = 50;
+        var start = [400, 400];
+
+
+        context.fillStyle = '#058';
+        context.fillStar(r, R, 300, 300, 30);
+
+        context.myMoveTo(500, 500);
+        context.drawStar(60,100, 30)
+
+    }
+
+
+
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
