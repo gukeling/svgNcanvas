@@ -179,3 +179,31 @@ xmp{
 .bg-white{
     background-color: #ffffff;
 }
+
+.guid{
+    border: 1px solid #306a78;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    background: #0d6770;
+    box-shadow: rgba(48, 106, 120, 0.5) 2px 3px 10px;
+}
+
+
+
+.guid a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.guid a:after{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-width: 6px 0 6px 9px;
+    border-color: transparent transparent transparent #fff;
+    border-style: solid;
+}
