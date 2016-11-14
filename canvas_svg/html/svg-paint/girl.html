@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body style="height: 100%">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" style="border: 1px solid crimson;">
+<div id="svg-wrap" style="height: 100%">
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" style="border: 1px solid crimson;">
 
 
 
 
 
-    <rect x="0" y="0" width="320" height="180" fill="url(#grad4)"/>
+        <rect x="0" y="0" width="320" height="180" fill="url(#grad4)"/>
 
-    <!--定义-->
-    <defs>
+        <!--定义-->
+        <defs>
 
-        <style>
-            body{
-                color: #FF5E24;
-                color: #ff8c00;
-                color: #FFAFA9;
-            }
-        </style>
-        <radialGradient id="face" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
-            <stop offset="0" stop-color="#FF5E24"></stop>
-            <stop offset="0.8" stop-color="#ff8c00"></stop>
-            <stop offset="1" stop-color="#FFAFA9"></stop>
+            <radialGradient id="face" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
+                <stop offset="0" stop-color="#FF5E24"></stop>
+                <stop offset="0.8" stop-color="#ff8c00"></stop>
+                <stop offset="1" stop-color="#FFAFA9"></stop>
 
-        </radialGradient>
+            </radialGradient>
+
+
+        </defs>
 
         <!--设置分组-->
         <g id="head"  stroke="#3C536A" stroke-width="2">
@@ -132,12 +130,175 @@
             </g>
 
         </g>
+
+    </svg>
+
+</div>
+
+
+<!--<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" style="border: 1px solid crimson;">
+
+
+
+
+
+    <rect x="0" y="0" width="320" height="180" fill="url(#grad4)"/>
+
+    &lt;!&ndash;定义&ndash;&gt;
+    <defs>
+
+        <style>
+            body{
+                color: #FF5E24;
+                color: #ff8c00;
+                color: #FFAFA9;
+            }
+        </style>
+        <radialGradient id="face" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
+            <stop offset="0" stop-color="#FF5E24"></stop>
+            <stop offset="0.8" stop-color="#ff8c00"></stop>
+            <stop offset="1" stop-color="#FFAFA9"></stop>
+
+        </radialGradient>
+
+        &lt;!&ndash;设置分组&ndash;&gt;
+        <g id="head"  stroke="#3C536A" stroke-width="2">
+            &lt;!&ndash;蝴蝶结&ndash;&gt;
+            <g  fill="#31BBC6">
+
+                <path d="M195 92 L 190 88 Q188 85 192 83 L201 80 Q205 79 206 82 L203 89"></path>
+                <path d="M200 105 L 198 111 Q197 116 202 115 L211 112 Q213 111 213 107 L207 103"></path>
+                <path  d="M195 92 L203 89 Q 207 90 207 93 L208 97 Q 209 100 207 103 L 200 105 Q 196 105 195 102 L194 96 Q 195 91 195 92"></path>
+            </g>
+            &lt;!&ndash;头发&ndash;&gt;
+            <g fill="#FDDC59">
+                <polygon points="142 80 134 146 198 169 197 80"></polygon>
+                <path   d="M  122 80 C 130 33 207 35 200 94 L 158 87 L 155 80 L152 85 L 121 80"></path>
+            </g>
+            &lt;!&ndash;脸&ndash;&gt;
+            <g fill="#F1F1F1">
+                &lt;!&ndash;脖子&ndash;&gt;
+                <path d="M148 120  L147 134 L157 134 L158 120"></path>
+                <path   stroke="#3C536A" d="M 128 81 L 123 106 C 125 116 130 118 135 119 L 177 125 C 189 123 190 116 191 107 L193 92 L 158 87 L 155 80 L152 85 L 128 81"></path>
+                &lt;!&ndash;五官&ndash;&gt;
+                <g>
+                    <path fill="none" d="M 135 92 C 134 85 146 87 142 93"></path>
+                    <circle cx="137" cy="102" r="7"  fill="url(#face)" stroke="none"></circle>
+                    <path fill="none" d="M 174 98 C 174 91 184 93 182 100"></path>
+                    <circle cx="176" cy="108" r="7" fill="url(#face)" stroke="none"></circle>
+
+                    <path fill="#3C536A" d="M 154 100 Q158 97 161 101 Q 160 104 157 104 Q 153 102 154 100"></path>
+                    <path fill="none" d="M 147 107 Q154 114 157 104 Q156 115 165 109"></path>
+                </g>
+            </g>
+
+            &lt;!&ndash;衣服&ndash;&gt;
+            <path fill="#28B5C7" d="M133 132  L128 181 L173 184 L173 133 Z"></path>
+
+            &lt;!&ndash;左边腿&ndash;&gt;
+            <g>
+                <path fill="#F1F1F1" d="M 130 216 L 126 268 L 135 268 L 140 218"></path>
+                <path fill="#2E7975" d="M 126 268 L123 277 L 135 277 L135 268"></path>
+            </g>
+
+            &lt;!&ndash;右边腿&ndash;&gt;
+            <g>
+                <path fill="#F1F1F1" d="M 154 216 L 159 270 L 167 268 L 164 218"></path>
+                <path fill="#2E7975" d="M 159 269 L157 279 L 169 277 L167 267"></path>
+            </g>
+
+            &lt;!&ndash;裙子&ndash;&gt;
+            <path fill="#31678B" d="M128 181 L119 218 L178 222 L173 184 Z"></path>
+
+            &lt;!&ndash;猫&ndash;&gt;
+            <g fill="#F1F1F1">
+
+                &lt;!&ndash;脸&ndash;&gt;
+                <g>
+                    <path d="M160 154 C 158 129 172 91 194 64 C194 72 195 70 195 76 Q202 76 206 83 C 211 80 210 80 217 81 C211 93 192 122 193 151"></path>
+                </g>
+                &lt;!&ndash;五官&ndash;&gt;
+                <g fill="#3C536A">
+                    <circle cx="187" cy="90" r="2" ></circle>
+                    <circle cx="199" cy="95" r="2"></circle>
+                    <path d="M188 97 Q 188 94 194 99 Q 194 100 189 100 Q 188 97 188 97 "></path>
+                </g>
+
+                &lt;!&ndash;轮廓&ndash;&gt;
+                <g>
+                    &lt;!&ndash;尾巴&ndash;&gt;
+                    <path d="M186 215 C208 245 241 227 234 201 C232 192 224 193 224  201 C222 235 184 208 194 200"></path>
+
+                    &lt;!&ndash;屁股&ndash;&gt;
+                    <path d="M160 154 Q 157 178 170 204 C 178 222 211 218 202 188 C 195 185  191 158  193 151 "></path>
+                    &lt;!&ndash;腿&ndash;&gt;
+                    <path d="M186 187C206 181 215 196 210 190C224 199 217 210 210 203 C208 195 191 193 191 196"></path>
+
+                    <path d="M173 192C182 185 203 183 198 184C205 183 211 192 202 192 C199 190 187 195 179 199"></path>
+                </g>
+
+
+            </g>
+
+            &lt;!&ndash;胳膊&ndash;&gt;
+            <g>
+                <path fill="#F1F1F1" d="M181 175 C197 175 186 158 180 167"></path>
+                <path fill="#28B5C7" d="M139 132 C 136 127 129 129 131 140 C 131 146 142 183 181 175 L180 167 C 146 176 139 129 139 132"></path>
+
+
+                <path fill="#F1F1F1" d="M155 158 C142 157 150 141 157 151"></path>
+                <path fill="#28B5C7" d="M192 151 C 198 147 198 159 194 158 C 179 166 163 161 155 158 L 157 151 C 185 160 188 151 193 150"></path>
+            </g>
+
+
+
+            &lt;!&ndash;猫手&ndash;&gt;
+            <g fill="#F1F1F1">
+
+                <path d="M180 136C191 135 189 130 200 132C215 125 212 138 202 141 C202 141 191 138 182 150"></path>
+
+                <path d="M168 138C179 138 193 147 195 151C202 153 203 166 187 157 C187 159 187 150 168 148"></path>
+
+            </g>
+
+        </g>
     </defs>
 
-    <!--创建图形引用-->
+    &lt;!&ndash;创建图形引用&ndash;&gt;
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#head"></use>
 
-</svg>
+</svg>-->
+
 
 </body>
+
+<script>
+    var svgXml = document.getElementById('svg-wrap').innerHTML;
+
+
+    var image = new Image();
+    image.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXml))); //给图片对象写入base64编码的svg流
+
+    var canvas = document.createElement('canvas');  //准备空画布
+//document.querySelector('#svg-wrap svg').width.animVal.valueAsString;
+    canvas.width = document.querySelector('#svg-wrap svg').getAttribute('width');//canvas.width = $('.svg-wrap svg').width();
+    canvas.height = document.querySelector('#svg-wrap svg').getAttribute('height');//canvas.height = $('.svg-wrap svg').height();
+
+
+
+    var context = canvas.getContext('2d');  //取得画布的2d绘图上下文
+    context.drawImage(image, 0, 0);
+
+    var a = document.createElement('a');
+    a.textContent = 'download';
+    a.href = canvas.toDataURL('image/png');  //将画布内的信息导出为png图片数据
+    a.download = "MapByMathArtSys.png";  //设定下载名称
+//    a.click(); //点击触发下载
+
+
+
+    document.body.appendChild(a);
+//    document.body.appendChild(canvas);
+
+</script>
 </html>
