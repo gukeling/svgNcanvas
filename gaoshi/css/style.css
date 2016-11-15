@@ -1,0 +1,107 @@
+html{
+    height: 100%;
+}
+body{
+    margin:0;
+    padding: 0;
+    height: 100%;
+    background-color: #c0ded2;
+}
+
+.chapter{
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-before:before{
+    content: "";
+    display: block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.bg1.bg-before:before {
+
+    background-image: url(../img/arches.png);
+    opacity: 0.4;
+    z-index: 1;
+}
+
+
+.bg2.bg-before:before {
+    background-image: url(../img/seigaiha.png);
+    opacity: 0.6;
+}
+
+
+.bg3.bg-before:before {
+    background-image: url(../img/swirl_pattern.png);
+    opacity: 0.6;
+}
+
+.bg4{
+    background-size: 25px 25px;
+    /*top left -45deg, #ace, #ace 5px, #f96 5px, #f96 10px*/
+    background-image: -moz-repeating-radial-gradient(at 0px 0px,#ace, #ace 5px, #f96 5px, #f96 10px);
+    /*background-image: -webkit-repeating-radial-gradient(0px 0px, #dae8d2, #dae8d2 5px, #c7d5bf 5px, #c7d5bf 7px);*/
+    background-image: -webkit-repeating-radial-gradient(0% 0%,
+        #dae8d2, #dae8d2 15%,
+        #0d6770 15%, #0d6770 25%,
+        #dae8d2 25%, #dae8d2 37%,
+        #306a78 37%, #306a78 47%,
+        #dae8d2 47%, #dae8d2 60%,
+        #0d6770 60%, #0d6770 68%/*,
+        #dae8d2 68%, #dae8d2 100%*/
+    );
+    /*background-image: -webkit-gradient(radial,center center, 0, center center, 10, from(#ace), to(#f96));*/
+
+}
+
+
+.bg5 {
+
+    background-size: 50px 50px;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #ABCDD2), color-stop(.25, rgba(218,232,210,0.2)), to(rgba(218,232,210,0.2))),
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #ABCDD2), color-stop(.25, rgba(218,232,210,0.2)), to(rgba(218,232,210,0.2))),
+    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, rgba(218,232,210,0.2)), color-stop(.75, #ABCDD2)),
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, rgba(218,232,210,0.2)), color-stop(.75, #ABCDD2));
+    background-image: -moz-linear-gradient(45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    -moz-linear-gradient(-45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    -moz-linear-gradient(45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%),
+    -moz-linear-gradient(-45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%);
+    background-image: -o-linear-gradient(45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    -o-linear-gradient(-45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    -o-linear-gradient(45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%),
+    -o-linear-gradient(-45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%);
+    background-image: linear-gradient(45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    linear-gradient(-45deg, #ABCDD2 25%, rgba(218,232,210,0.2) 25%, rgba(218,232,210,0.2)),
+    linear-gradient(45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%),
+    linear-gradient(-45deg, rgba(218,232,210,0.2) 75%, #ABCDD2 75%);
+}
+
+.bg6 {
+    background-size: 20px 20px;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(50%, transparent), color-stop(50%, rgba(180, 198, 170, 0.5)), to(rgba(180, 198, 170, 0.5))),
+    -webkit-gradient(linear, 0 0, 100% 0, color-stop(50%, transparent), color-stop(50%, rgba(180, 198, 170, 0.5)), to(rgba(180, 198, 170, 0.5)));
+    background-image: -moz-linear-gradient(transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5)),
+    -moz-linear-gradient(0deg, transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5));
+    background-image: -o-linear-gradient(transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5)),
+    -o-linear-gradient(0deg, transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5));
+    background-image: linear-gradient(transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5)),
+    linear-gradient(90deg, transparent 50%, rgba(180, 198, 170, .5) 50%, rgba(180, 198, 170, .5));
+}
+
+
+.chapter-card{
+    height: 100%;
+    opacity: 1;
+    background: #05acaf;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(52, 52, 52, 0.5),inset 0 0 15px rgba(85, 85, 85, 0.2);
+}
