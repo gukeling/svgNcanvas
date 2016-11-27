@@ -15,6 +15,8 @@ body{
     padding: 15px;
     width: 100%;
     height: 100%;
+    max-height: 760px;
+    max-width: 600px;
 }
 
 .bg-before:before{
@@ -101,7 +103,65 @@ body{
 .chapter-card{
     height: 100%;
     opacity: 1;
-    background: #05acaf;
+    background: #47504F;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(52, 52, 52, 0.5),inset 0 0 15px rgba(85, 85, 85, 0.2);
 }
+
+.color-card-series1 .card1{
+    background: #EEE6D9;
+}
+
+.color-card-series1 .card2{
+    background: #D9CDBD;
+}
+
+.color-card-series1 .card3{
+    background: #AAAB9D;
+}
+
+.color-card-series1 .card4{
+    background: #47504F;
+}
+
+.color-card-series1 .card5{
+    background: #A2D4D1;
+}
+
+.color-card-series1 .card6{
+    background: #D6E6E6;
+}
+
+.color-card-series2 .card1{
+    background: #F9F8F8;
+}
+.color-card-series2 .card2{
+    background: #BDBBBC;
+}
+.color-card-series2 .card3{
+    background: #F2F2F4;
+}
+.color-card-series2 .card4{
+    background: #E0E1E5;
+}
+.color-card-series2 .card5{
+    background: #F5E8DF;
+}
+.color-card-series2 .card6{
+    background: #FFFFFF;
+}
+.color-card-series2 .card7{
+    background: #F2F2F2;
+}
+.color-card-series2 .card8{
+    background: #F8F8F8;
+}
+
+.color-card-series2 .card9{
+    background: #EBECEE;
+}
+
+.color-card-series2 .card10{
+    background: #F1F5F9;
+}
+
